@@ -5,11 +5,12 @@
 //  Created by Dxc_iOS on 2018/9/28.
 //  Copyright © 2018 超级课堂. All rights reserved.
 //
-
 #import "CJKTAlert.h"
 #import "UIView+CJKTExtension.h"
 #import "NSString+CJKTAttributedString.h"
-
+#define kCJKTAlertScreenWidth [UIScreen mainScreen].bounds.size.width
+#define kCJKTAlertScreenHeight [UIScreen mainScreen].bounds.size.height
+static const CGFloat kDefaultAnimateDuration = 0.35;
 typedef void(^FinishBlock)(NSInteger index);
 
 @interface CJKTAlert ()
@@ -19,7 +20,7 @@ typedef void(^FinishBlock)(NSInteger index);
 
 /** bgView */
 @property (nonatomic, strong) UIView * maskView;
-
+@property (nonatomic, strong) UIView *contentView;
 /** 标题*/
 @property (nonatomic, strong) UILabel * titleLabel;
 
@@ -78,7 +79,7 @@ typedef void(^FinishBlock)(NSInteger index);
 
 - (instancetype)initWithTitle:(NSString *)title message:(NSString *)message messageAlignment:(NSTextAlignment)textAlignment Item:(NSArray<NSString *> *)itemArr selectBlock:(void(^)(NSInteger index))selectBlock
 {
-    self = [super init];
+    self = [super initWithFrame:CGRectMake(0, 0, kCJKTAlertScreenWidth, kCJKTAlertScreenHeight)];
     if (self) {
         
         //基本配置调用放最前面
@@ -106,11 +107,11 @@ typedef void(^FinishBlock)(NSInteger index);
 - (void)defaultValueMethod
 {
     //自身背景色
-    self.backgroundColor = [UIColor whiteColor];
+    self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+    self.alpha = 0;
+    [[UIApplication sharedApplication].keyWindow addSubview:self];
     
-    self.layer.masksToBounds = YES;
-    self.layer.cornerRadius = 10;
-    
+     [self addSubview:self.contentView];
     //自身弹出alertView的宽度 屏幕宽*（0.5~0.9之间最佳）
     viewWith = [UIScreen mainScreen].bounds.size.width*0.8;
     
@@ -136,13 +137,22 @@ typedef void(^FinishBlock)(NSInteger index);
     btnHeight = 50;
     
     //自身背景灰色的alpha 0~1 可适当修改 越大越灰
-    bgViewAlpha = 0.8;
+    bgViewAlpha = 0.5;
     
 }
 
 
-#pragma mark - creatUI lazy
-
+#pragma mark - 懒加载 UI
+-(UIView *)contentView{
+    if (!_contentView) {
+        _contentView = [[UIView alloc] init];
+        _contentView.backgroundColor = [UIColor whiteColor];
+        _contentView.layer.cornerRadius = 10.f;
+        _contentView.alpha = 0;
+        
+    }
+    return _contentView;
+}
 - (UILabel *)titleLabel
 {
     if (!_titleLabel) {
@@ -150,7 +160,7 @@ typedef void(^FinishBlock)(NSInteger index);
         _titleLabel.textColor = [UIColor blackColor];
         _titleLabel.font = [UIFont systemFontOfSize:18 weight:500];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
-        [self addSubview:_titleLabel];
+        [_contentView addSubview:_titleLabel];
     }
     return _titleLabel;
 }
@@ -163,7 +173,7 @@ typedef void(^FinishBlock)(NSInteger index);
         _messageLabel.font = [UIFont systemFontOfSize:messageLabelFont];
         _messageLabel.textAlignment = self.messageAlignment;
         _messageLabel.numberOfLines = 0;
-        [self addSubview:_messageLabel];
+        [_contentView addSubview:_messageLabel];
     }
     return _messageLabel;
 }
@@ -173,7 +183,7 @@ typedef void(^FinishBlock)(NSInteger index);
     if (!_lineView) {
         _lineView = [UIView new];
         _lineView.backgroundColor = [UIColor grayColor];
-        [self addSubview:_lineView];
+        [_contentView addSubview:_lineView];
     }
     return _lineView;
 }
@@ -229,15 +239,44 @@ typedef void(^FinishBlock)(NSInteger index);
     }
     
     if (!self.itemArr.count) {
-        
-        self.frame = CGRectMake(0, 0, viewWith, self.lineView.bottom);
-        self.lineView.hidden = YES;
-        
         NSLog(@"没有item点击事件，视图无法消失");
-        
+//        if (self.showType == CJKTAlertShowType_SlideInFromTop) {
+//            self.contentView.frame = CGRectMake(0, -kCJKTAlertScreenHeight, viewWith, self.lineView.bottom);
+//            self.lineView.hidden = YES;
+//        }else{
+//            self.contentView.frame = CGRectMake(0,  0, viewWith, self.lineView.bottom);
+//            self.lineView.hidden = YES;
+//        }
     }else{
-        
-        self.frame = CGRectMake(0, 0, viewWith, self.lineView.bottom+btnHeight);
+//        if (self.showType == CJKTAlertShowType_SlideInFromTop) {
+//
+//             self.contentView.frame = CGRectMake(kCJKTAlertScreenWidth/2-viewWith/2, -kCJKTAlertScreenHeight, viewWith, self.lineView.bottom+btnHeight);
+//
+//        }
+//        else if (self.showType == CJKTAlertShowType_SlideInFromBottom){
+//
+//            self.contentView.frame = CGRectMake(kCJKTAlertScreenWidth/2-viewWith/2, kCJKTAlertScreenHeight, viewWith, self.lineView.bottom+btnHeight);
+//
+//        }
+//        else if (self.showType == CJKTAlertShowType_SlideInFromLeft){
+//            self.contentView.centerY = self.centerY;
+//            self.contentView.frame = CGRectMake(-kCJKTAlertScreenWidth, 0, viewWith, self.lineView.bottom+btnHeight);
+//
+//        }
+//        else if (self.showType == CJKTAlertShowType_SlideInFromRight){
+//            self.contentView.centerY = self.centerY;
+//            self.contentView.frame = CGRectMake(kCJKTAlertScreenWidth, 0, viewWith, self.lineView.bottom+btnHeight);
+//
+//        }
+//        else{
+//
+//            self.contentView.frame = CGRectMake(kCJKTAlertScreenWidth/2-viewWith/2,  kCJKTAlertScreenHeight/2-(self.lineView.bottom+btnHeight)/2 ,viewWith, self.lineView.bottom+btnHeight);
+//
+//        }
+//
+          self.contentView.frame = CGRectMake(kCJKTAlertScreenWidth/2-viewWith/2,  kCJKTAlertScreenHeight/2-(self.lineView.bottom+btnHeight)/2 ,viewWith, self.lineView.bottom+btnHeight);
+       
+       
         
         //只做最多3个按钮
         [self creatButtonWithCount:(self.itemArr.count > 3 ? 3 : self.itemArr.count)];
@@ -258,7 +297,7 @@ typedef void(^FinishBlock)(NSInteger index);
         [button setTitle:self.itemArr[i] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         button.titleLabel.font = [UIFont systemFontOfSize:16];
-        [self addSubview:button];
+        [self.contentView addSubview:button];
         [button addTarget:self action:@selector(cancelButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.buttonArr addObject:button];
         button.tag = 10+i;
@@ -270,7 +309,7 @@ typedef void(^FinishBlock)(NSInteger index);
             
             UIView *btnLineView = [[UIView alloc] initWithFrame:CGRectMake(btnW*i, btnY, 0.5, btnH)];
             btnLineView.backgroundColor = [UIColor grayColor];
-            [self addSubview:btnLineView];
+            [self.contentView addSubview:btnLineView];
             [self.btnLineArr addObject:btnLineView];
             
         }
@@ -278,19 +317,22 @@ typedef void(^FinishBlock)(NSInteger index);
     
 }
 
-#pragma mark - buttonAction
+#pragma mark - 点击事件
 
 - (void)cancelButtonAction:(UIButton *)btn
 {
     __weak typeof(self) weakSelf = self;
+     weakSelf.contentView.transform = CGAffineTransformIdentity;
     [UIView animateWithDuration:0.25 animations:^{
-        
-        self.transform = CGAffineTransformMakeScale(0.0001,0.0001);
-        weakSelf.maskView.backgroundColor = [UIColor clearColor];
+        weakSelf.alpha = 0;
+        weakSelf.contentView.alpha = 0;
+        weakSelf.contentView.transform = CGAffineTransformMakeScale(0.0001,0.0001);
+//        weakSelf.maskView.backgroundColor = [UIColor clearColor];
         
     } completion:^(BOOL finished) {
-        [weakSelf.maskView removeFromSuperview];
-        weakSelf.maskView = nil;
+
+        [weakSelf removeFromSuperview];
+       
         
         if (weakSelf.finishBlock) {
             weakSelf.finishBlock(btn.tag-10);
@@ -300,24 +342,136 @@ typedef void(^FinishBlock)(NSInteger index);
     
 }
 
-- (void)showWithView:(UIView *)view
-{
-    if (view == nil) return;
-    if (_maskView == nil) {
-        _maskView = [[UIView alloc] initWithFrame:view.bounds];
+#pragma mark -- 显示
+- (void)show{
+    if (self.showType) {
+          __weak typeof(self) weakSelf = self;
+        switch (self.showType) {
+           
+            case CJKTAlertShowType_FadeIn:{
+                 self.contentView.frame = CGRectMake(kCJKTAlertScreenWidth/2-viewWith/2,  kCJKTAlertScreenHeight/2-(self.lineView.bottom+btnHeight)/2 ,viewWith, self.lineView.bottom+btnHeight);
+                self.contentView.transform = CGAffineTransformMakeScale(0.0, 0.0);
+                [UIView animateWithDuration:kDefaultAnimateDuration animations:^{
+                    weakSelf.alpha = 1;
+                    weakSelf.contentView.alpha = 1;
+                    weakSelf.contentView.transform = CGAffineTransformIdentity;
+                } completion:nil];
+            }
+                break;
+                
+            case CJKTAlertShowType_ShrinkIn:{
+               self.contentView.frame = CGRectMake(kCJKTAlertScreenWidth/2-viewWith/2,  kCJKTAlertScreenHeight/2-(self.lineView.bottom+btnHeight)/2 ,viewWith, self.lineView.bottom+btnHeight);
+                self.contentView.transform = CGAffineTransformMakeScale(1.5,1.5);
+                [UIView animateWithDuration:kDefaultAnimateDuration animations:^{
+                    weakSelf.alpha = 1;
+                    weakSelf.contentView.alpha = 1;
+                    weakSelf.contentView.transform = CGAffineTransformIdentity;
+                } completion:nil];
+                
+            }
+                break;
+                
+            case CJKTAlertShowType_SlideInFromTop:{
+             
+               CGRect startFrame = CGRectMake(kCJKTAlertScreenWidth/2-viewWith/2,  kCJKTAlertScreenHeight/2-(self.lineView.bottom+btnHeight)/2 ,viewWith, self.lineView.bottom+btnHeight);
+                startFrame.origin.y = - CGRectGetHeight(startFrame);
+                weakSelf.contentView.frame = startFrame;
+                [UIView animateWithDuration:kDefaultAnimateDuration animations:^{
+                  
+                    weakSelf.contentView.transform = CGAffineTransformMakeTranslation(0, 2*CGRectGetHeight(startFrame));
+                    weakSelf.alpha = 1;
+                    weakSelf.contentView.alpha = 1;
+                } completion:^(BOOL finished) {
+             
+                }];
+               
+                
+            }
+                break;
+                
+            case CJKTAlertShowType_SlideInFromBottom:{
+               
+                CGRect startFrame = CGRectMake(kCJKTAlertScreenWidth/2-viewWith/2,  kCJKTAlertScreenHeight/2-(self.lineView.bottom+btnHeight)/2 ,viewWith, self.lineView.bottom+btnHeight);
+                startFrame.origin.y = 2*CGRectGetHeight(startFrame);
+                weakSelf.contentView.frame = startFrame;
+                [UIView animateWithDuration:kDefaultAnimateDuration animations:^{
+                    
+                    weakSelf.contentView.transform = CGAffineTransformMakeTranslation(0, -CGRectGetHeight(startFrame));
+                    
+                    weakSelf.alpha = 1;
+                    weakSelf.contentView.alpha = 1;
+                    
+                } completion:^(BOOL finished) {
+//                 weakSelf.contentView.transform = CGAffineTransformIdentity;
+                }];
+                
+            }
+                break;
+                
+            case CJKTAlertShowType_SlideInFromLeft:{
+              
+                CGRect startFrame = CGRectMake(kCJKTAlertScreenWidth/2-viewWith/2,  kCJKTAlertScreenHeight/2-(self.lineView.bottom+btnHeight)/2 ,viewWith, self.lineView.bottom+btnHeight);
+                startFrame.origin.x = - CGRectGetWidth(startFrame);
+                weakSelf.contentView.frame = startFrame;
+                [UIView animateWithDuration:kDefaultAnimateDuration animations:^{
+//                    weakSelf.contentView.transform = CGAffineTransformMakeTranslation(CGRectGetWidth(startFrame), 0);
+                    weakSelf.contentView.frame = CGRectMake(kCJKTAlertScreenWidth/2-self->viewWith/2,  kCJKTAlertScreenHeight/2-(self.lineView.bottom+self->btnHeight)/2 ,self->viewWith, self.lineView.bottom+self->btnHeight);
+                    weakSelf.alpha = 1;
+                    weakSelf.contentView.alpha = 1;
+                    
+                } completion:^(BOOL finished) {
+                }];
+            }
+                break;
+                
+                
+            case CJKTAlertShowType_SlideInFromRight:{
+                CGRect startFrame = CGRectMake(kCJKTAlertScreenWidth/2-viewWith/2,  kCJKTAlertScreenHeight/2-(self.lineView.bottom+btnHeight)/2 ,viewWith, self.lineView.bottom+btnHeight);
+                startFrame.origin.x = 2*CGRectGetWidth(self.bounds);
+                weakSelf.contentView.frame = startFrame;
+                [UIView animateWithDuration:kDefaultAnimateDuration animations:^{
+                    //                    weakSelf.contentView.transform = CGAffineTransformMakeTranslation(CGRectGetWidth(startFrame), 0);
+                    weakSelf.contentView.frame = CGRectMake(kCJKTAlertScreenWidth/2-self->viewWith/2,  kCJKTAlertScreenHeight/2-(self.lineView.bottom+self->btnHeight)/2 ,self->viewWith, self.lineView.bottom+self->btnHeight);
+                    weakSelf.alpha = 1;
+                    weakSelf.contentView.alpha = 1;
+                    
+                } completion:^(BOOL finished) {
+                }];
+                
+            }
+                break;
+                
+                
+            default:{
+               
+            }
+                break;
+        }
+    }else{
+        __weak typeof(self) weakSelf = self;
+        weakSelf.contentView.center = self.center;
+        
+        [UIView animateWithDuration:kDefaultAnimateDuration delay:0.0
+                            options:UIViewAnimationOptionCurveLinear // 动画的过渡效果：匀速执行
+                         animations:^{
+                             weakSelf.alpha = 1;
+                             weakSelf.contentView.alpha = 1;
+                             weakSelf.contentView.transform = CGAffineTransformIdentity;
+                            
+                         } completion:^(BOOL finished) {
+                             
+                         }];
     }
     
-    self.maskView.backgroundColor = [UIColor colorWithRed:30/255.0 green:30/255.0 blue:30/255.0 alpha:(bgViewAlpha < 0 && bgViewAlpha > 1) ? 0.5 : bgViewAlpha];
-
-    [_maskView addSubview:self];
-    [view addSubview:_maskView];
-    self.center = view.center;
     
-//    动画效果
-    self.transform = CGAffineTransformMakeScale(0, 0);
-    [UIView animateWithDuration:0.25 animations:^{
-        self.transform = CGAffineTransformMakeScale(1.0, 1.0);//CGAffineTransformIdentity;
-    }];
+    
+    
+    
+}
+
+#pragma mark -- 隐藏
+-(void)dissMiss{
+    
 }
 
 #pragma mark - data
@@ -495,7 +649,7 @@ typedef void(^FinishBlock)(NSInteger index);
 
 - (void)dealloc
 {
-    NSLog(@"-----dealloc----");
+    NSLog(@"销毁");
 }
 
 

@@ -8,8 +8,36 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, CJKTAlertShowType) {
+    CJKTAlertShowType_None,              //不使用动画
+    CJKTAlertShowType_FadeIn,            //渐显
+    CJKTAlertShowType_ShrinkIn,          //缩小
+    CJKTAlertShowType_SlideInFromTop,    //从上向下
+    CJKTAlertShowType_SlideInFromBottom, //从下向上
+    CJKTAlertShowType_SlideInFromLeft,   //从左向右
+    CJKTAlertShowType_SlideInFromRight,  //从右向左
+    CJKTAlertShowType_BounceIn,
+    CJKTAlertShowType_BounceInFromTop,
+    CJKTAlertShowType_BounceInFromBottom,
+    CJKTAlertShowType_BounceInFromLeft,
+    CJKTAlertShowType_BounceInFromRight
+};
+typedef NS_ENUM(NSUInteger, CJKTAlertDismissType) {
+    CJKTAlertDismissType_None,
+    CJKTAlertDismissType_FadeOut,
+    CJKTAlertDismissType_GrowOut,
+    CJKTAlertDismissType_ShrinkOut,
+    CJKTAlertDismissType_SlideOutToTop,
+    CJKTAlertDismissType_SlideOutToBottom,
+    CJKTAlertDismissType_SlideOutToLeft,
+    CJKTAlertDismissType_SlideOutToRight,
+    CJKTAlertDismissType_BounceOut,
+    CJKTAlertDismissType_BounceOutToTop,
+    CJKTAlertDismissType_BounceOutToBottom,
+    CJKTAlertDismissType_BounceOutToLeft,
+    CJKTAlertDismissType_BounceOutToRight
+};
 @interface CJKTAlert : UIView
-
 
 /** 大标题title的字体大小 */
 @property (nonatomic, strong) UIFont * titleLabelFont;
@@ -31,6 +59,11 @@
 
 /** 总共最多3个item 按顺序把颜色放数组里面就行了，没item设置无效，多设置按顺序取 */
 @property (nonatomic, strong) NSArray<UIColor *> * itemTitleColorArr;
+
+
+@property (nonatomic, assign) CJKTAlertShowType showType;
+
+@property (nonatomic, assign) CJKTAlertDismissType dismissType;
 /**
  *  CJKTAlert初始化创建方法
  *  @param title     大标题
@@ -42,10 +75,9 @@
 
 /**
  *  CJKTAlertview显示方法
- *  @param view 传入俯父视图view
  */
-- (void)showWithView:(UIView *)view;
 
+- (void)show;
 
 /** 设置副标题某段文字的颜色 如果设置了副标题颜色messageLabelColor，必须放在前面，否则此处设置无效，会被messageLabelColor覆盖，如果没有副标题则此处设置无效 */
 - (void)messageLabelTextColorWith:(NSRange)range andColor:(UIColor *)color;

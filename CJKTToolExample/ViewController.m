@@ -65,12 +65,10 @@
     [self.view addSubview:myTextView];
 }
 -(void)ButtonClicked{
-
-     [CJKTShareMenuView showShareMenuViewTitleArray:@[@"拍发票",@"看照片",@"拍发票",@"看照片"] imgNameArray:@[@"拍发票",@"看照片",@"拍发票",@"看照片"] blockTapAction:^(NSInteger index) {
-
-     NSLog(@"%zd",index);
-     }];
-    
+//  ;@[@"拍发票",@"看照片",@"拍发票",@"看照片"]
+    [CJKTShareMenuView showShareMenuViewWithTitleArray:@[@"拍发票",@"看照片",@"拍发票",@"看照片"] imgNameArray:@[@"拍发票",@"看照片",@"拍发票",@"看照片"] completionHandler:^(CJKTSharePlatformType platformType) {
+        NSLog(@"platformType = %ld",(long)platformType);
+    }];
    
     
 }
@@ -107,8 +105,9 @@
     
     [alert messageLabelTextColorWith:NSMakeRange(3, 5) andColor:[UIColor redColor]];
     alert.itemTitleColorArr = @[[UIColor grayColor],[UIColor greenColor]];;
-    
-    [alert showWithView:self.view];
+    alert.showType = CJKTAlertShowType_SlideInFromRight;
+
+    [alert show];
 
 }
 

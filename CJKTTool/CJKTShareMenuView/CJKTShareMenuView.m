@@ -14,15 +14,15 @@
 @interface CJKTShareMenuView ()
 @property (nonatomic, strong) NSArray *titleArray;
 @property (nonatomic, strong) NSArray *imgNameArray;
-@property (nonatomic, copy) void (^blockTapAction)(NSInteger index);
+@property (nonatomic, copy) void (^blockTapAction)(CJKTSharePlatformType platformType);
 @property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, strong) NSMutableArray *buttonArray;
 @end
 
 @implementation CJKTShareMenuView
-+ (void)showShareMenuViewTitleArray:(NSArray *)titleArray
-             imgNameArray:(NSArray *)imgNameArray
-           blockTapAction:( void(^)(NSInteger index) )blockTapAction{
++ (void)showShareMenuViewWithTitleArray:(NSArray *)titleArray
+                           imgNameArray:(NSArray *)imgNameArray
+                      completionHandler:(void(^)(CJKTSharePlatformType platformType))completionHandler{
     if (titleArray.count != imgNameArray.count || !titleArray.count) {
         return;
     }
@@ -32,7 +32,7 @@
     modeView.alpha = 0;
     modeView.titleArray = titleArray;
     modeView.imgNameArray = imgNameArray;
-    modeView.blockTapAction = blockTapAction;
+    modeView.blockTapAction = completionHandler;
     [[UIApplication sharedApplication].keyWindow addSubview:modeView];
     
     // 创建内容
@@ -44,7 +44,7 @@
 
 - (void)setupContentView{
     
-    self.contentView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenHeight, kScreenWidth, kw(50) + ((self.titleArray.count-1)/4+1)*ItemH + kw(30))];
+    self.contentView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenHeight, kScreenWidth, kw(50) + ((self.titleArray.count-1)/4+1)*ItemH + kw(30)*2)];
     UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:self.contentView.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(kw(20), kw(15))];
     CAShapeLayer *shapeLayer = [CAShapeLayer layer];
     shapeLayer.path = path.CGPath;
@@ -57,7 +57,12 @@
 }
 
 - (void)setupContent{
-    
+    UILabel *titleLab = [[UILabel alloc] initWithFrame:CGRectMake(self.contentView.bounds.size.width/2-kw(50),kw(15), kw(100), kw(30))];
+    titleLab.text = @"分享给好友";
+    titleLab.textAlignment = NSTextAlignmentCenter;
+    titleLab.font = [UIFont systemFontOfSize:15.f];
+   
+    [self.contentView addSubview:titleLab];
     self.buttonArray = [[NSMutableArray alloc] init];
     CGFloat itemW = (self.contentView.bounds.size.width-kw(30))/4;
     for (int i = 0; i < self.titleArray.count; i++) {
@@ -65,7 +70,7 @@
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.tag = i;
         button.titleLabel.font = [UIFont systemFontOfSize:13];
-        button.frame = CGRectMake(kw(15) + i%4*itemW, kw(10) + i/4*ItemH, itemW, ItemH);
+        button.frame = CGRectMake(kw(15) + i%4*itemW, kw(45) + i/4*ItemH, itemW, ItemH);
         [button setTitle:self.titleArray[i] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor colorWithRed:0.46f green:0.50f blue:0.54f alpha:1.00f] forState:UIControlStateNormal];
         [button setImage:[UIImage imageNamed:self.imgNameArray[i]] forState:UIControlStateNormal];
@@ -109,6 +114,7 @@
     UIButton *cancleButton = [UIButton buttonWithType:UIButtonTypeCustom];
     cancleButton.frame = CGRectMake(0, self.contentView.bounds.size.height - kw(50), self.contentView.bounds.size.width, kw(50));
     cancleButton.titleLabel.font = [UIFont systemFontOfSize:16.f];
+    cancleButton.backgroundColor = [UIColor colorWithRed:232/255.0 green:232/255.0 blue:232/255.0 alpha:1.0];
     [cancleButton setTitle:@"取消" forState:UIControlStateNormal];
     [cancleButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [cancleButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
