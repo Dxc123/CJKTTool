@@ -105,7 +105,8 @@
     
     [alert messageLabelTextColorWith:NSMakeRange(3, 5) andColor:[UIColor redColor]];
     alert.itemTitleColorArr = @[[UIColor grayColor],[UIColor greenColor]];;
-    alert.showType = CJKTAlertShowType_SlideInFromRight;
+//    alert.showType = CJKTAlertShowType_ShrinkIn;
+//    alert.dismissType = CJKTAlertDismissType_ShrinkOut;
 
     [alert show];
 

@@ -322,30 +322,67 @@ typedef void(^FinishBlock)(NSInteger index);
 - (void)cancelButtonAction:(UIButton *)btn
 {
     __weak typeof(self) weakSelf = self;
-     weakSelf.contentView.transform = CGAffineTransformIdentity;
-    [UIView animateWithDuration:0.25 animations:^{
-        weakSelf.alpha = 0;
-        weakSelf.contentView.alpha = 0;
-        weakSelf.contentView.transform = CGAffineTransformMakeScale(0.0001,0.0001);
-//        weakSelf.maskView.backgroundColor = [UIColor clearColor];
-        
-    } completion:^(BOOL finished) {
-
-        [weakSelf removeFromSuperview];
-       
-        
-        if (weakSelf.finishBlock) {
-            weakSelf.finishBlock(btn.tag-10);
+    if (self.dismissType) {
+        switch (self.dismissType) {
+            case CJKTAlertDismissType_None:
+            {
+                weakSelf.contentView.transform = CGAffineTransformIdentity;
+                [UIView animateWithDuration:kDefaultAnimateDuration animations:^{
+                    weakSelf.contentView.alpha = 0;
+                    weakSelf.alpha = 0;
+                } completion:^(BOOL finished) {
+                    [weakSelf removeFromSuperview];
+                    weakSelf.contentView = nil;
+                    if (weakSelf.finishBlock) {
+                        weakSelf.finishBlock(btn.tag-10);
+                    }
+                }];
+            }
+                break;
+            case CJKTAlertDismissType_ShrinkOut:
+            {
+                weakSelf.contentView.transform = CGAffineTransformIdentity;
+                [UIView animateWithDuration:kDefaultAnimateDuration animations:^{
+                    weakSelf.contentView.alpha = 0;
+                    weakSelf.alpha = 0;
+                    weakSelf.contentView.transform = CGAffineTransformMakeScale(0.0001,0.0001);
+                } completion:^(BOOL finished) {
+                    [weakSelf removeFromSuperview];
+                    weakSelf.contentView = nil;
+                    if (weakSelf.finishBlock) {
+                        weakSelf.finishBlock(btn.tag-10);
+                    }
+                }];
+            }
+                break;
+            default:
+                break;
         }
-        
-    }];
+    
+    }else{
+        weakSelf.contentView.transform = CGAffineTransformIdentity;
+        [UIView animateWithDuration:kDefaultAnimateDuration animations:^{
+            weakSelf.contentView.alpha = 0;
+            weakSelf.alpha = 0;
+           
+        } completion:^(BOOL finished) {
+            [weakSelf removeFromSuperview];
+            weakSelf.contentView = nil;
+            if (weakSelf.finishBlock) {
+                weakSelf.finishBlock(btn.tag-10);
+            }
+        }];
+    }
+    
+
+
     
 }
 
 #pragma mark -- 显示
 - (void)show{
     if (self.showType) {
-          __weak typeof(self) weakSelf = self;
+        __weak typeof(self) weakSelf = self;
         switch (self.showType) {
            
             case CJKTAlertShowType_FadeIn:{

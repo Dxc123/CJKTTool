@@ -16,11 +16,7 @@ typedef NS_ENUM(NSUInteger, CJKTAlertShowType) {
     CJKTAlertShowType_SlideInFromBottom, //从下向上
     CJKTAlertShowType_SlideInFromLeft,   //从左向右
     CJKTAlertShowType_SlideInFromRight,  //从右向左
-    CJKTAlertShowType_BounceIn,
-    CJKTAlertShowType_BounceInFromTop,
-    CJKTAlertShowType_BounceInFromBottom,
-    CJKTAlertShowType_BounceInFromLeft,
-    CJKTAlertShowType_BounceInFromRight
+   
 };
 typedef NS_ENUM(NSUInteger, CJKTAlertDismissType) {
     CJKTAlertDismissType_None,
@@ -60,9 +56,9 @@ typedef NS_ENUM(NSUInteger, CJKTAlertDismissType) {
 /** 总共最多3个item 按顺序把颜色放数组里面就行了，没item设置无效，多设置按顺序取 */
 @property (nonatomic, strong) NSArray<UIColor *> * itemTitleColorArr;
 
-
+//显示动画类型
 @property (nonatomic, assign) CJKTAlertShowType showType;
-
+//消失动画类型
 @property (nonatomic, assign) CJKTAlertDismissType dismissType;
 /**
  *  CJKTAlert初始化创建方法
