@@ -17,6 +17,7 @@ pod 'IAPHelper',:inhibit_warnings => true#内购
 
 pod 'LEEAlert',:inhibit_warnings => true #链式语法、优雅的可自定义Alert ActionSheet
 pod 'FFPopup' ,:inhibit_warnings => true
+pod 'Toast',:inhibit_warnings => true
 #Kit集合
 pod 'YYKit',:inhibit_warnings => true
 pod 'QMUIKit',:inhibit_warnings => true#腾讯QMUI团队开源

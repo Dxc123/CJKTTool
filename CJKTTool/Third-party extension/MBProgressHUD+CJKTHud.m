@@ -1,18 +1,20 @@
 //
-//  MBProgressHUD+ZWX.m
-//  ULOSDKDemo
+//  MBProgressHUD+CJKTHud.m
+//  CJKTToolExample
 //
-//  Created by sky-red on 16/7/28.
-//  Copyright © 2016年 深圳优络科技发展有限公司. All rights reserved.
+//  Created by Dxc_iOS on 2019/8/26.
+//  Copyright © 2019 CJKT. All rights reserved.
 //
 
-#import "MBProgressHUD+ULO.h"
+#import "MBProgressHUD+CJKTHud.h"
 
-@implementation MBProgressHUD (ULO)
-
-+ (void)showLoadingToView:(UIView *)view
-{
-    [self showMessage:@"加载中"
+@implementation MBProgressHUD (CJKTHud)
+/**
+ *  显示文字信息(文字+默认菊花圈圈)
+ */
++ (void)showMessage:(NSString *)message
+             toView:(UIView *)view{
+    [self showMessage:message
           detailsText:nil
                  icon:nil
                toView:view
@@ -20,9 +22,8 @@
                  mode:MBProgressHUDModeIndeterminate
            completion:nil];
 }
-
-+ (void)showSuccessMsg:(NSString *)message toView:(UIView *)toView
-{
+//显示成功的消息（文字+默认图片）
++ (void)showSuccessMsg:(NSString *)message toView:(UIView *)toView{
     [self showMessage:message
           detailsText:nil
                  icon:@"success"
@@ -31,33 +32,55 @@
                  mode:MBProgressHUDModeCustomView
            completion:nil];
 }
-
-+ (void)showErrorMsg:(NSString *)message toView:(UIView *)toView
-{
+//显示错误的消息（文字+默认图片）
++ (void)showErrorMsg:(NSString *)message toView:(UIView *)toView{
     [self showMessage:message
           detailsText:nil
                  icon:@"error"
                toView:toView
-                delay:1.8
+                delay:1.5
                  mode:MBProgressHUDModeCustomView
            completion:nil];
 }
 
+
+
 /**
  *  隐藏
  */
-+ (void)hideHUDForView:(UIView *)view
-{
++ (void)hideHUDForView:(UIView *)view{
     if (view == nil) view = [UIApplication sharedApplication].keyWindow;
     [self hideHUDForView:view animated:YES];
 }
 
++(void)showCustomAnimation:(NSString *)msg withImgArry:(NSArray *)imgArry toView:(UIView *)toView{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:toView animated:YES];
+    
+    hud.label.text = msg;
+    hud.mode = MBProgressHUDModeCustomView;
+    // 设置图片
+    UIImageView *showImageView = [[UIImageView alloc] init];
+    showImageView.animationImages = imgArry;
+    [showImageView setAnimationRepeatCount:0];
+    [showImageView setAnimationDuration:(imgArry.count + 1) * 0.075];
+    [showImageView startAnimating];
+    
+    hud.customView = showImageView;
+    // 隐藏时候从父控件中移除
+    hud.removeFromSuperViewOnHide = YES;
+}
+
+
 /**
- *  显示消息
- *
- *  @param message       消息内容
- *  @param detailsText   消息详情
- *  @param view          显示的视图
+ 公共方法：显示消息
+ 
+ @param message 消息内容
+ @param detailsText 消息详情
+ @param icon 图片
+ @param view superView
+ @param delay  延迟时间
+ @param mode 模式
+ @param completion 回调
  */
 + (void)showMessage:(NSString *)message
         detailsText:(NSString *)detailsText
@@ -71,8 +94,8 @@
     
     // 快速显示一个提示信息
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
-    hud.labelText = message;
-    hud.labelFont = [UIFont boldSystemFontOfSize:16];
+    hud.label.text = message;
+    hud.label.font = [UIFont boldSystemFontOfSize:16];
     
     // 设置图片
     if (mode == MBProgressHUDModeCustomView) {
@@ -81,9 +104,9 @@
     
     // 再设置模式
     hud.mode = mode;
-    hud.color = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.68];
+    hud.bezelView.color = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.68];
     hud.margin = 36.f;
-    hud.cornerRadius = 8.f;
+    hud.layer.cornerRadius = 8.f;
     
     // 隐藏时候从父控件中移除
     hud.removeFromSuperViewOnHide = YES;
@@ -95,7 +118,7 @@
     }
     
     // 1秒之后再消失
-    [hud hide:YES afterDelay:delay];
+    [hud hideAnimated:YES afterDelay:delay];
 }
 
 @end

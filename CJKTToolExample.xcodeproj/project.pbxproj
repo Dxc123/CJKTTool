@@ -35,8 +35,6 @@
 		C01CA41A21AE98880040BC73 /* CJKTAgrementView.m in Sources */ = {isa = PBXBuildFile; fileRef = C01CA41221AE98880040BC73 /* CJKTAgrementView.m */; };
 		C01CA41C21AE98880040BC73 /* CJKTShareMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = C01CA41521AE98880040BC73 /* CJKTShareMenuView.m */; };
 		C01CA41D21AE98880040BC73 /* CJKTActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = C01CA41821AE98880040BC73 /* CJKTActionSheet.m */; };
-		C01E68B5230FA72A0039FD05 /* MBProgressHUD+ULO.m in Sources */ = {isa = PBXBuildFile; fileRef = C01E68B4230FA72A0039FD05 /* MBProgressHUD+ULO.m */; };
-		C01E68E8230FA7A20039FD05 /* MBProgressHUD+JCHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = C01E68E6230FA7A20039FD05 /* MBProgressHUD+JCHUD.m */; };
 		C01E6920230FABA60039FD05 /* QYBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C01E691D230FABA60039FD05 /* QYBaseViewController.m */; };
 		C01E6921230FABA60039FD05 /* QYTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C01E691E230FABA60039FD05 /* QYTabBarViewController.m */; };
 		C01E6922230FABA60039FD05 /* QYNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C01E691F230FABA60039FD05 /* QYNavigationViewController.m */; };
@@ -88,6 +86,7 @@
 		C0A1BF7F21AFCDA80046CD9F /* CJKTAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = C0A1BF7E21AFCDA80046CD9F /* CJKTAlert.m */; };
 		C0A1BF8421AFCEBD0046CD9F /* NSString+CJKTAttributedString.m in Sources */ = {isa = PBXBuildFile; fileRef = C0A1BF8021AFCEBD0046CD9F /* NSString+CJKTAttributedString.m */; };
 		C0A1BF8521AFCEBD0046CD9F /* UIView+CJKTExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = C0A1BF8321AFCEBD0046CD9F /* UIView+CJKTExtension.m */; };
+		C0ED2B7423138EC30010F826 /* MBProgressHUD+CJKTHud.m in Sources */ = {isa = PBXBuildFile; fileRef = C0ED2B7323138EC30010F826 /* MBProgressHUD+CJKTHud.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -141,10 +140,6 @@
 		C01CA41721AE98880040BC73 /* CJKTAgrementView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJKTAgrementView.h; sourceTree = "<group>"; };
 		C01CA41821AE98880040BC73 /* CJKTActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJKTActionSheet.m; sourceTree = "<group>"; };
 		C01CA41921AE98880040BC73 /* CJKTShareMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJKTShareMenuView.h; sourceTree = "<group>"; };
-		C01E68B3230FA72A0039FD05 /* MBProgressHUD+ULO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+ULO.h"; sourceTree = "<group>"; };
-		C01E68B4230FA72A0039FD05 /* MBProgressHUD+ULO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+ULO.m"; sourceTree = "<group>"; };
-		C01E68E6230FA7A20039FD05 /* MBProgressHUD+JCHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+JCHUD.m"; sourceTree = "<group>"; };
-		C01E68E7230FA7A20039FD05 /* MBProgressHUD+JCHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+JCHUD.h"; sourceTree = "<group>"; };
 		C01E691A230FABA60039FD05 /* QYBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYBaseViewController.h; sourceTree = "<group>"; };
 		C01E691B230FABA60039FD05 /* QYNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYNavigationViewController.h; sourceTree = "<group>"; };
 		C01E691C230FABA60039FD05 /* QYTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYTabBarViewController.h; sourceTree = "<group>"; };
@@ -207,6 +202,8 @@
 		C0A1BF8121AFCEBD0046CD9F /* UIView+CJKTExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CJKTExtension.h"; sourceTree = "<group>"; };
 		C0A1BF8221AFCEBD0046CD9F /* NSString+CJKTAttributedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CJKTAttributedString.h"; sourceTree = "<group>"; };
 		C0A1BF8321AFCEBD0046CD9F /* UIView+CJKTExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CJKTExtension.m"; sourceTree = "<group>"; };
+		C0ED2B7223138EC30010F826 /* MBProgressHUD+CJKTHud.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+CJKTHud.h"; sourceTree = "<group>"; };
+		C0ED2B7323138EC30010F826 /* MBProgressHUD+CJKTHud.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+CJKTHud.m"; sourceTree = "<group>"; };
 		E9C7B83616F3BC58833ABDB1 /* Pods_CJKTToolExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CJKTToolExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -358,10 +355,8 @@
 		C01E68B2230FA6C20039FD05 /* Third-party extension */ = {
 			isa = PBXGroup;
 			children = (
-				C01E68E7230FA7A20039FD05 /* MBProgressHUD+JCHUD.h */,
-				C01E68E6230FA7A20039FD05 /* MBProgressHUD+JCHUD.m */,
-				C01E68B3230FA72A0039FD05 /* MBProgressHUD+ULO.h */,
-				C01E68B4230FA72A0039FD05 /* MBProgressHUD+ULO.m */,
+				C0ED2B7223138EC30010F826 /* MBProgressHUD+CJKTHud.h */,
+				C0ED2B7323138EC30010F826 /* MBProgressHUD+CJKTHud.m */,
 				C01A00E6223BE75C00BD7CD9 /* MBProgressHUD+CJKTGifAnimation.h */,
 				C01A00EA223BE75C00BD7CD9 /* MBProgressHUD+CJKTGifAnimation.m */,
 				C01A00EB223BE75C00BD7CD9 /* MJRefreshGifHeader+CJKTRefresh.h */,
@@ -709,6 +704,7 @@
 				C01A00EE223BE75D00BD7CD9 /* MBProgressHUD+CJKTGifAnimation.m in Sources */,
 				C01E6921230FABA60039FD05 /* QYTabBarViewController.m in Sources */,
 				C01CA41A21AE98880040BC73 /* CJKTAgrementView.m in Sources */,
+				C0ED2B7423138EC30010F826 /* MBProgressHUD+CJKTHud.m in Sources */,
 				C0A1BF8521AFCEBD0046CD9F /* UIView+CJKTExtension.m in Sources */,
 				C01A00FD223BE7F400BD7CD9 /* QiCodePreviewView.m in Sources */,
 				C01E6951230FAC1A0039FD05 /* QYSecondViewController.m in Sources */,
@@ -719,9 +715,7 @@
 				C01A00E4223BDE7300BD7CD9 /* ZXPUnicode.m in Sources */,
 				C01A00EC223BE75D00BD7CD9 /* UIView+HHAddSubviews.m in Sources */,
 				C01BEFE921D74C4C006EB4D8 /* CJKTTool.m in Sources */,
-				C01E68E8230FA7A20039FD05 /* MBProgressHUD+JCHUD.m in Sources */,
 				C01BEFFA21D74E71006EB4D8 /* CJKTUploadAvatarTool.m in Sources */,
-				C01E68B5230FA72A0039FD05 /* MBProgressHUD+ULO.m in Sources */,
 				C01BEFFD21D7513C006EB4D8 /* MCAlertView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
