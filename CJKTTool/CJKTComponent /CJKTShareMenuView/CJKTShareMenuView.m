@@ -33,6 +33,7 @@
     modeView.titleArray = titleArray;
     modeView.imgNameArray = imgNameArray;
     modeView.blockTapAction = completionHandler;
+    
     [[UIApplication sharedApplication].keyWindow addSubview:modeView];
     
     // 创建内容
@@ -138,6 +139,7 @@
 - (void)dismiss{
     
     [UIView animateWithDuration:0.25 animations:^{
+        self.layer.affineTransform = CGAffineTransformMakeScale(0.1, 0.1);
         self.alpha = 0;
         self.contentView.transform = CGAffineTransformIdentity;
     } completion:^(BOOL finished) {
