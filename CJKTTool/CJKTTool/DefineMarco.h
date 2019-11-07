@@ -8,7 +8,7 @@
 
 #ifndef DefineMarco_h
 #define DefineMarco_h
-
+#import "CJKTTool.h"
 
 //屏幕宽高
 #define kScreenW [UIScreen mainScreen].bounds.size.width
@@ -48,6 +48,10 @@
 #define RGB(r,g,b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1.0]
 ///随机颜色
 #define RandomColor [UIColor colorWithRed:arc4random_uniform(256)/255.0 green:arc4random_uniform(256)/255.0 blue:arc4random_uniform(256)/255.0 alpha:1]
+/**
+ 分割线颜色
+ */
+#define separeLineColor RGB(206,206,206)
 
 //字符串是否为空
 #define IsStrEmpty(_ref)    (((_ref) == nil) || ([(_ref) isEqual:[NSNull null]]) ||([(_ref)isEqualToString:@""]))

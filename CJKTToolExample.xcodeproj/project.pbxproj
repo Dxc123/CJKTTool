@@ -152,7 +152,6 @@
 		C01E694F230FAC1A0039FD05 /* QYSecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYSecondViewController.m; sourceTree = "<group>"; };
 		C01E6955230FAC200039FD05 /* QYThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYThirdViewController.m; sourceTree = "<group>"; };
 		C01E6956230FAC200039FD05 /* QYThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYThirdViewController.h; sourceTree = "<group>"; };
-		C01E695A230FAD890039FD05 /* MacroDefinition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MacroDefinition.h; sourceTree = "<group>"; };
 		C066D7CF21C6779900AA0989 /* infor_popshare_light_pre@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "infor_popshare_light_pre@2x.png"; sourceTree = "<group>"; };
 		C066D7D021C6779900AA0989 /* infor_popshare_day_nor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "infor_popshare_day_nor@2x.png"; sourceTree = "<group>"; };
 		C066D7D121C6779900AA0989 /* infor_popshare_sina_pre@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "infor_popshare_sina_pre@3x.png"; sourceTree = "<group>"; };
@@ -344,7 +343,6 @@
 		C01CA41121AE98880040BC73 /* CJKTTool */ = {
 			isa = PBXGroup;
 			children = (
-				C01E695A230FAD890039FD05 /* MacroDefinition.h */,
 				C01E68B2230FA6C20039FD05 /* Third-party extension */,
 				C01BEFEA21D74D18006EB4D8 /* CJKTComponent  */,
 				C01BEFE621D74C3A006EB4D8 /* CJKTTool */,

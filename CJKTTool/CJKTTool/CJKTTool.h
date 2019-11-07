@@ -23,7 +23,7 @@ typedef NS_ENUM(NSUInteger, OpenType) {
 /**
  判断是否是iPhone X系列
  */
-+ (BOOL)isiPhoneX;
++ (BOOL)IsiPhoneX;
 
 /**
  全面判断字符串为空

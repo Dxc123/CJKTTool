@@ -13,7 +13,7 @@
 @implementation CJKTTool
 
 #pragma mark - 判断是否是iPhone X系列
-+ (BOOL)isiPhoneX {
++ (BOOL)IsiPhoneX {
     if (@available(iOS 11.0,*)) {
         UIWindow *keyWindow = [[[UIApplication sharedApplication] delegate] window];
         
