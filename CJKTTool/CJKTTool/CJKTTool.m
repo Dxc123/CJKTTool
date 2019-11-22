@@ -32,6 +32,128 @@
     
     
 }
+
+#pragma mark -- 时间格式化******/
+#pragma mark -- 获取当前时间戳
++(NSString *)getCurrentTime{
+    NSDate *senddata = [NSDate date];
+    NSString *date2 = [NSString stringWithFormat:@"%ld", (long)[senddata timeIntervalSince1970]];
+    return date2;
+}
++(NSString *) compareCurrentTime:(NSString *)str
+{
+    
+    //把字符串转为NSdate
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *timeDate = [dateFormatter dateFromString:str];
+    
+    //得到与当前时间差
+    NSTimeInterval timeInterval = [timeDate timeIntervalSinceNow];
+    timeInterval = -timeInterval;
+    //标准时间和北京时间差8个小时
+    // timeInterval = timeInterval - 86060;
+    long temp = 0;
+    NSString *result;
+    if (timeInterval < 60) {
+        
+        result = [NSString stringWithFormat:@"刚刚"];
+        
+    }
+    else if((temp = timeInterval/60) <60){
+        
+        result = [NSString stringWithFormat:@"%ld分钟前",temp];
+        
+    }
+    
+    else if((temp = temp/60) <24){
+        result = [NSString stringWithFormat:@"%ld小时前",temp];
+    }
+    
+    else if((temp = temp/24) <30){
+        result = [NSString stringWithFormat:@"%ld天前",temp];
+    }
+    
+    else if((temp = temp/30) <12){
+        result = [NSString stringWithFormat:@"%ld月前",temp];
+    }
+//    else{
+//        temp = temp/12;
+//        result = [NSString stringWithFormat:@"%ld年前",temp];
+//    }
+    else{
+        if (str.length>5) {
+            NSArray *strArr = [str componentsSeparatedByString:@" "];
+             result = [strArr firstObject];
+        }else{
+            result = str;
+        }
+       
+    }
+    
+    return  result;
+    
+}
+
++(NSString *)distanceTimeWithBeforeTime:(double)beTime
+{
+    NSTimeInterval now = [[NSDate date]timeIntervalSince1970];
+    double distanceTime = now - beTime;
+    NSString *distanceStr;
+    
+    NSDate *beDate = [NSDate dateWithTimeIntervalSince1970:beTime];
+    NSDateFormatter* df = [[NSDateFormatter alloc]init];
+    [df setDateFormat:@"HH:mm"];
+    NSString * timeStr = [df stringFromDate:beDate];
+    
+    [df setDateFormat:@"dd"];
+    NSString *nowDay = [df stringFromDate:[NSDate date]];
+    NSString *lastDay = [df stringFromDate:beDate];
+    
+    if (distanceTime < 60) {
+        
+        distanceStr = @"刚刚";
+        
+    }
+    else if (distanceTime <60*60) {
+        
+        distanceStr = [NSString stringWithFormat:@"%ld分钟前",(long)distanceTime/60];
+        
+    }
+    else if(distanceTime <246060 && [nowDay integerValue] == [lastDay integerValue]){
+        
+        distanceStr = [NSString stringWithFormat:@"今天 %@",timeStr];
+        
+    }
+    else if(distanceTime<246060*2 && [nowDay integerValue] != [lastDay integerValue]){
+        
+        if ([nowDay integerValue] - [lastDay integerValue] ==1 || ([lastDay integerValue] - [nowDay integerValue] > 10 && [nowDay integerValue] == 1)) {
+            distanceStr = [NSString stringWithFormat:@"昨天 %@",timeStr];
+        }
+        else{
+            [df setDateFormat:@"MM-dd HH:mm"];
+            distanceStr = [df stringFromDate:beDate];
+        }
+        
+    }
+    else if(distanceTime <246060*365){
+        
+        [df setDateFormat:@"MM-dd HH:mm"];
+        distanceStr = [df stringFromDate:beDate];
+        
+    }
+    else{
+        
+        [df setDateFormat:@"yyyy-MM-dd HH:mm"];
+        distanceStr = [df stringFromDate:beDate];
+        
+    }
+    return distanceStr;
+}
+
+/***#pragma mark -- 时间格式化******/
+/********************************/
+
 /**
  全面判断字符串为空
  */

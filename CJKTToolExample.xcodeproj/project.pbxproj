@@ -41,6 +41,7 @@
 		C01E6949230FAC120039FD05 /* QYHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C01E6944230FAC120039FD05 /* QYHomeViewController.m */; };
 		C01E6951230FAC1A0039FD05 /* QYSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C01E694F230FAC1A0039FD05 /* QYSecondViewController.m */; };
 		C01E6958230FAC200039FD05 /* QYThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C01E6955230FAC200039FD05 /* QYThirdViewController.m */; };
+		C04C18252387B7110060DADA /* CJKTSaveImgTool.m in Sources */ = {isa = PBXBuildFile; fileRef = C04C18242387B7110060DADA /* CJKTSaveImgTool.m */; };
 		C066D7F821C6779900AA0989 /* infor_popshare_light_pre@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C066D7CF21C6779900AA0989 /* infor_popshare_light_pre@2x.png */; };
 		C066D7F921C6779900AA0989 /* infor_popshare_day_nor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C066D7D021C6779900AA0989 /* infor_popshare_day_nor@2x.png */; };
 		C066D7FA21C6779900AA0989 /* infor_popshare_sina_pre@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C066D7D121C6779900AA0989 /* infor_popshare_sina_pre@3x.png */; };
@@ -152,6 +153,8 @@
 		C01E694F230FAC1A0039FD05 /* QYSecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYSecondViewController.m; sourceTree = "<group>"; };
 		C01E6955230FAC200039FD05 /* QYThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QYThirdViewController.m; sourceTree = "<group>"; };
 		C01E6956230FAC200039FD05 /* QYThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QYThirdViewController.h; sourceTree = "<group>"; };
+		C04C18232387B7110060DADA /* CJKTSaveImgTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CJKTSaveImgTool.h; sourceTree = "<group>"; };
+		C04C18242387B7110060DADA /* CJKTSaveImgTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CJKTSaveImgTool.m; sourceTree = "<group>"; };
 		C066D7CF21C6779900AA0989 /* infor_popshare_light_pre@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "infor_popshare_light_pre@2x.png"; sourceTree = "<group>"; };
 		C066D7D021C6779900AA0989 /* infor_popshare_day_nor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "infor_popshare_day_nor@2x.png"; sourceTree = "<group>"; };
 		C066D7D121C6779900AA0989 /* infor_popshare_sina_pre@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "infor_popshare_sina_pre@3x.png"; sourceTree = "<group>"; };
@@ -267,6 +270,8 @@
 				C01A00E3223BDE7300BD7CD9 /* ZXPUnicode.m */,
 				C01BEFEF21D74E70006EB4D8 /* CJKTUploadAvatarTool.h */,
 				C01BEFF221D74E70006EB4D8 /* CJKTUploadAvatarTool.m */,
+				C04C18232387B7110060DADA /* CJKTSaveImgTool.h */,
+				C04C18242387B7110060DADA /* CJKTSaveImgTool.m */,
 				C01A00E7223BE75C00BD7CD9 /* UIView+HHAddSubviews.h */,
 				C01A00E8223BE75C00BD7CD9 /* UIView+HHAddSubviews.m */,
 			);
@@ -688,6 +693,7 @@
 				C01A00ED223BE75D00BD7CD9 /* MJRefreshGifHeader+CJKTRefresh.m in Sources */,
 				C01CA41D21AE98880040BC73 /* CJKTActionSheet.m in Sources */,
 				C01A00FE223BE7F400BD7CD9 /* QiCodeManager.m in Sources */,
+				C04C18252387B7110060DADA /* CJKTSaveImgTool.m in Sources */,
 				C0A1BF7A21AFBB100046CD9F /* CJKTActionSheetCell.m in Sources */,
 				C0A1BF7F21AFCDA80046CD9F /* CJKTAlert.m in Sources */,
 				C01CA3E021AE733D0040BC73 /* ViewController.m in Sources */,
@@ -860,7 +866,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4M62W98N2A;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/CJKTTool/MacroDefinition.h";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/CJKTTool/CJKTTool/DefineMarco.h";
 				INFOPLIST_FILE = CJKTToolExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -883,7 +889,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4M62W98N2A;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/CJKTTool/MacroDefinition.h";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/CJKTTool/CJKTTool/DefineMarco.h";
 				INFOPLIST_FILE = CJKTToolExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
