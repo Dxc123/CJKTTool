@@ -83,6 +83,7 @@
 		C066D81E21C6779900AA0989 /* infor_popshare_copylink_nor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C066D7F521C6779900AA0989 /* infor_popshare_copylink_nor@2x.png */; };
 		C066D81F21C6779900AA0989 /* infor_popshare_friends_pre@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C066D7F621C6779900AA0989 /* infor_popshare_friends_pre@3x.png */; };
 		C066D82021C6779900AA0989 /* infor_popshare_weixing_pre@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C066D7F721C6779900AA0989 /* infor_popshare_weixing_pre@3x.png */; };
+		C07D83A5238830C60023E73A /* CJKTTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = C07D83A4238830C60023E73A /* CJKTTextField.m */; };
 		C0A1BF7A21AFBB100046CD9F /* CJKTActionSheetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C0A1BF7921AFBB100046CD9F /* CJKTActionSheetCell.m */; };
 		C0A1BF7F21AFCDA80046CD9F /* CJKTAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = C0A1BF7E21AFCDA80046CD9F /* CJKTAlert.m */; };
 		C0A1BF8421AFCEBD0046CD9F /* NSString+CJKTAttributedString.m in Sources */ = {isa = PBXBuildFile; fileRef = C0A1BF8021AFCEBD0046CD9F /* NSString+CJKTAttributedString.m */; };
@@ -196,6 +197,8 @@
 		C066D7F521C6779900AA0989 /* infor_popshare_copylink_nor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "infor_popshare_copylink_nor@2x.png"; sourceTree = "<group>"; };
 		C066D7F621C6779900AA0989 /* infor_popshare_friends_pre@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "infor_popshare_friends_pre@3x.png"; sourceTree = "<group>"; };
 		C066D7F721C6779900AA0989 /* infor_popshare_weixing_pre@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "infor_popshare_weixing_pre@3x.png"; sourceTree = "<group>"; };
+		C07D83A3238830C60023E73A /* CJKTTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CJKTTextField.h; sourceTree = "<group>"; };
+		C07D83A4238830C60023E73A /* CJKTTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CJKTTextField.m; sourceTree = "<group>"; };
 		C0A1BF7821AFBB100046CD9F /* CJKTActionSheetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJKTActionSheetCell.h; sourceTree = "<group>"; };
 		C0A1BF7921AFBB100046CD9F /* CJKTActionSheetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJKTActionSheetCell.m; sourceTree = "<group>"; };
 		C0A1BF7D21AFCDA80046CD9F /* CJKTAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJKTAlert.h; sourceTree = "<group>"; };
@@ -241,10 +244,10 @@
 			isa = PBXGroup;
 			children = (
 				C01A00F7223BE7F400BD7CD9 /* Imge */,
-				C01A00F4223BE7F400BD7CD9 /* QiCodePreviewView.m */,
-				C01A00F5223BE7F400BD7CD9 /* QiCodeManager.m */,
 				C01A00F6223BE7F400BD7CD9 /* QiCodePreviewView.h */,
+				C01A00F4223BE7F400BD7CD9 /* QiCodePreviewView.m */,
 				C01A00FC223BE7F400BD7CD9 /* QiCodeManager.h */,
+				C01A00F5223BE7F400BD7CD9 /* QiCodeManager.m */,
 			);
 			path = QiCodeReader;
 			sourceTree = "<group>";
@@ -268,10 +271,10 @@
 				C01BEFE821D74C4C006EB4D8 /* CJKTTool.m */,
 				C01A00E2223BDE7300BD7CD9 /* ZXPUnicode.h */,
 				C01A00E3223BDE7300BD7CD9 /* ZXPUnicode.m */,
-				C01BEFEF21D74E70006EB4D8 /* CJKTUploadAvatarTool.h */,
-				C01BEFF221D74E70006EB4D8 /* CJKTUploadAvatarTool.m */,
-				C04C18232387B7110060DADA /* CJKTSaveImgTool.h */,
-				C04C18242387B7110060DADA /* CJKTSaveImgTool.m */,
+				C07D83A3238830C60023E73A /* CJKTTextField.h */,
+				C07D83A4238830C60023E73A /* CJKTTextField.m */,
+				C07D83A2238830510023E73A /* 保存图片 */,
+				C07D83A12388302C0023E73A /* 上传头像 */,
 				C01A00E7223BE75C00BD7CD9 /* UIView+HHAddSubviews.h */,
 				C01A00E8223BE75C00BD7CD9 /* UIView+HHAddSubviews.m */,
 			);
@@ -325,6 +328,8 @@
 			isa = PBXGroup;
 			children = (
 				C01A00F0223BE7B200BD7CD9 /* Resoure */,
+				C01BEFEA21D74D18006EB4D8 /* CJKTComponent  */,
+				C01E68B2230FA6C20039FD05 /* Third-party extension */,
 				C01CA41121AE98880040BC73 /* CJKTTool */,
 				C01E6919230FABA60039FD05 /* Base */,
 				C01E693D230FAC120039FD05 /* Home */,
@@ -348,8 +353,6 @@
 		C01CA41121AE98880040BC73 /* CJKTTool */ = {
 			isa = PBXGroup;
 			children = (
-				C01E68B2230FA6C20039FD05 /* Third-party extension */,
-				C01BEFEA21D74D18006EB4D8 /* CJKTComponent  */,
 				C01BEFE621D74C3A006EB4D8 /* CJKTTool */,
 			);
 			path = CJKTTool;
@@ -414,8 +417,8 @@
 		C01E6953230FAC200039FD05 /* Third */ = {
 			isa = PBXGroup;
 			children = (
-				C01E6955230FAC200039FD05 /* QYThirdViewController.m */,
 				C01E6956230FAC200039FD05 /* QYThirdViewController.h */,
+				C01E6955230FAC200039FD05 /* QYThirdViewController.m */,
 			);
 			path = Third;
 			sourceTree = "<group>";
@@ -476,6 +479,24 @@
 				C066D7F721C6779900AA0989 /* infor_popshare_weixing_pre@3x.png */,
 			);
 			path = shareImge;
+			sourceTree = "<group>";
+		};
+		C07D83A12388302C0023E73A /* 上传头像 */ = {
+			isa = PBXGroup;
+			children = (
+				C01BEFEF21D74E70006EB4D8 /* CJKTUploadAvatarTool.h */,
+				C01BEFF221D74E70006EB4D8 /* CJKTUploadAvatarTool.m */,
+			);
+			path = "上传头像";
+			sourceTree = "<group>";
+		};
+		C07D83A2238830510023E73A /* 保存图片 */ = {
+			isa = PBXGroup;
+			children = (
+				C04C18232387B7110060DADA /* CJKTSaveImgTool.h */,
+				C04C18242387B7110060DADA /* CJKTSaveImgTool.m */,
+			);
+			path = "保存图片";
 			sourceTree = "<group>";
 		};
 		C0A1BF7B21AFCC7B0046CD9F /* CJKTActionSheet */ = {
@@ -721,6 +742,7 @@
 				C01BEFE921D74C4C006EB4D8 /* CJKTTool.m in Sources */,
 				C01BEFFA21D74E71006EB4D8 /* CJKTUploadAvatarTool.m in Sources */,
 				C01BEFFD21D7513C006EB4D8 /* MCAlertView.m in Sources */,
+				C07D83A5238830C60023E73A /* CJKTTextField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

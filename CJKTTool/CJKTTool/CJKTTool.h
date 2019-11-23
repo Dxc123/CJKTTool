@@ -31,7 +31,6 @@ typedef NS_ENUM(NSUInteger, OpenType) {
 //时间转化成“刚刚、几分钟前、几小时前、几天前、某月某日几点几分”格式
 //注意：后台返回的时间类型  "2016-10-11 12:33:33"
 +(NSString *)compareCurrentTime:(NSString *)str;
-
 //注意：后台返回的时间戳包括10位或者有小数点。
 //eg：“1480064761” 1480064761.000000
 +(NSString *)distanceTimeWithBeforeTime:(double)beTime;
