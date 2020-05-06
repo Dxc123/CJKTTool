@@ -1,0 +1,33 @@
+//
+//  CJKTToolPrefixHeader.pch
+//  CJKTToolExample
+//
+//  Created by daixingchuang on 2020/4/24.
+//  Copyright © 2020 CJKT. All rights reserved.
+//
+
+#ifndef CJKTToolPrefixHeader_pch
+#define CJKTToolPrefixHeader_pch
+
+//  $(SRCROOT)
+
+
+#import "DefineMarco.h"
+#import "CJKTTool.h"
+#import "CJKTCategory.h"
+#import "CJKTAPIs.h"
+
+#import <Masonry.h>
+#import <YYKit.h>
+#import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
+
+
+#import "CJKTSingleton.h"
+#import "CJKTUserModel.h"
+
+#define SINGLETON [CJKTSingleton sharedInstance]
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* CJKTToolPrefixHeader_pch */
