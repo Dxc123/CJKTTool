@@ -23,12 +23,12 @@
     [super viewDidLoad];
     UILabel *lab1 = [CJKTTool initUILabelWithFrame:CGRectMake(20, 100, 150, 40) title:@"你好你哈哈哦哦" numberOfLines:0 textAlignment:NSTextAlignmentCenter textColor:[UIColor redColor] font:[UIFont systemFontOfSize:15]];
       
-    lab1.attributedText = [NSMutableAttributedString  pj_addLinkWithTotalString:lab1.text SubStringArray:@[@"哈哈哦哦"]];
+    lab1.attributedText = [NSMutableAttributedString  cjkt_addLinkWithTotalString:lab1.text SubStringArray:@[@"哈哈哦哦"]];
     [self.view addSubview:lab1];
     
     UIButton *btn = [CJKTTool initUIButtonWithFrame:CGRectMake(20, 200, 200, 40) title:@"你好你哈哈哦哦" tag:0 backGround:[UIColor clearColor] textColor:[UIColor blackColor] borderWidth:0 borderColor:[UIColor clearColor] cornerRadius:0 font:[UIFont systemFontOfSize:15]];
     
-    btn.titleLabel.attributedText = [NSMutableAttributedString  pj_addLinkWithTotalString:lab1.text SubStringArray:@[@"哈哈哦哦"]];
+    btn.titleLabel.attributedText = [NSMutableAttributedString  cjkt_addLinkWithTotalString:lab1.text SubStringArray:@[@"哈哈哦哦"]];
     [self.view addSubview:btn];
     
     UIButton *timeBtn = [CJKTTool initUIButtonWithFrame:CGRectMake(20, 250, 40, 40) imgNormal:@"icon_next" imgSelected:@""];//login_icon_hides

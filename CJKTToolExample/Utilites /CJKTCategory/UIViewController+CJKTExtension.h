@@ -22,12 +22,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 /**
- if(self.navigationController.viewControllers.count <= 1)
- {
+ if(self.navigationController.viewControllers.count <= 1){
  [self dismissViewControllerAnimated:YES completion:nil];
  }
- else
- {
+ else{
  [self cjkt_popToViewController:@"ViewController" animated:YES];
  }
  */

@@ -33,6 +33,43 @@
     
 }
 
++(UIWindow*)keyWindow{
+    UIWindow        *foundWindow = nil;
+    NSArray         *windows = [[UIApplication sharedApplication] windows];
+    for (UIWindow   *window in windows) {
+        if (window.isKeyWindow) {
+            foundWindow = window;
+            break;
+        }
+    }
+    return foundWindow;
+}
+
+/**
+  延迟执行
+ */
+void GCD_AFTER(CGFloat time,dispatch_block_t block)
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(time * NSEC_PER_SEC)), dispatch_get_main_queue(), block);
+}
+
+/**
+ 注册通知
+ */
+void MM_AddObserver(id observer,SEL aSelector,NSNotificationName aName)
+{
+    [[NSNotificationCenter defaultCenter] addObserver:observer selector:aSelector name:aName object:nil];
+}
+
+/**
+ 发送通知
+ */
+void MM_PostNotification(NSNotificationName aName,id anObject)
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:aName object:anObject];
+}
+
+
 #pragma mark -- 时间格式化******/
 #pragma mark -- 获取当前时间戳
 +(NSString *)getCurrentTime{

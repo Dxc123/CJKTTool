@@ -8,18 +8,25 @@
 
 #import "QYFourViewController.h"
 #import "CJKTRecordView.h"
+
 @interface QYFourViewController ()
 @property (nonatomic, strong) CJKTRecordView *recordView;
+@property (nonatomic, strong) UILabel *label;
 @end
 
 @implementation QYFourViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.recordView  = [[CJKTRecordView alloc] initWithFrame:CGRectMake(0, 200, SCREEN_WIDTH, 220)];
-    self.recordView.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:self.recordView];
+//    self.recordView  = [[CJKTRecordView alloc] initWithFrame:CGRectMake(0, 200, SCREEN_WIDTH, 220)];
+//    self.recordView.backgroundColor = [UIColor whiteColor];
+//    [self.view addSubview:self.recordView];
+//
+   
+  
+    
 }
+
 
 /*
 #pragma mark - Navigation

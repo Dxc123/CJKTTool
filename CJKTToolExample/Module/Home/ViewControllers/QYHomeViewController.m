@@ -7,10 +7,14 @@
 //
 
 #import "QYHomeViewController.h"
-#import <YYKit/YYKit.h>
-extern CFAbsoluteTime StartTime;
+#import "YYKit.h"
+#import "CJKTCategory.h"
+
 @interface QYHomeViewController ()
-@property (nonatomic, copy) NSArray<NSString *> *weathers;
+<UITableViewDelegate,UITableViewDataSource>
+@property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong)NSArray *titles;
+@property(nonatomic,strong)NSArray *classNames;
 @end
 
 @implementation QYHomeViewController
@@ -18,49 +22,71 @@ extern CFAbsoluteTime StartTime;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
- 
-    NSString * msg=@"苹果发布了没有太多更新的 iOS 13 beta 8；一次编码、到处运行；SwiftUI 的两个特性；如何让网站加载更快,苹果发布了没有太多更新的 iOS 13 beta 8；一次编码、到处运行；SwiftUI 的两个特性；如何让网站加载更快苹果发布了没有太多更新的 iOS 13 beta 8；一次编码、到处运行；SwiftUI 的两个特性；如何让网站加载更快";
-    NSMutableAttributedString *one = [[NSMutableAttributedString alloc] initWithString:msg];
-    
-   
-    //    高亮
-    YYTextHighlight *highlight = [YYTextHighlight new];
-    [highlight setColor:[UIColor colorWithRed:1.000 green:0.795 blue:0.014 alpha:1.000]];
-    [one setTextHighlight:highlight range:one.rangeOfAll];
-    
-    
-    YYLabel *label = [YYLabel new];
-    label.font = [UIFont systemFontOfSize:16];
-    label.text = msg;
-//    label.attributedText = one;
-    label.textAlignment = NSTextAlignmentCenter;
-    label.textVerticalAlignment = YYTextVerticalAlignmentCenter;
-    label.textColor = [UIColor blackColor];
-    label.textContainerInset = UIEdgeInsetsMake(5, 10, 5, 10);
-    label.numberOfLines = 0;
-    label.backgroundColor = [UIColor colorWithWhite:0.933 alpha:1.000];
-    label.top = 100;
-    label.width = self.view.width;
-//   根据文字 计算高度
-    label.height = [msg heightForFont:label.font width:label.width] + 2 * 10;
-     NSLog(@"label.height=%f",label.height);
-    [self.view addSubview:label];
-    
+     self.titles =@[
+         @"Demo1(基于CollectionView转盘效果的实现)"
+     ];
 
-//    点击事件
-    label.textTapAction = ^(UIView * _Nonnull containerView, NSAttributedString * _Nonnull text, NSRange range, CGRect rect) {
-          NSLog(@"点击lab");
-    };
-//    label.highlightTapAction = ^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect) {
-//         NSLog(@"点击lab");
-//    };
+    self.classNames = @[
+        @"QYDemoViewController"
+    ];
+    [self.view addSubview:self.tableView];
     
-    
-    
-    
-   
     
 }
+
+- (UITableView *)tableView {
+    if(!_tableView) {
+        _tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCell"];
+        _tableView.tableFooterView = [UIView new];
+    }
+    return _tableView;
+}
+
+#pragma mark - UITableViewDataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return self.classNames.count;
+    
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.textLabel.text = self.titles[indexPath.section];;
+    return cell;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 44;
+}
+
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return UITableViewAutomaticDimension;
+//}
+//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return 100;
+//}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+ NSString *className = self.classNames[indexPath.section];
+   Class class = NSClassFromString(className);
+   if (class) {
+       UIViewController *ctrl = class.new;
+       ctrl.title = self.classNames[indexPath.section];
+       [self.navigationController pushViewController:ctrl animated:YES];
+   }
+   [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

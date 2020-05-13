@@ -20,7 +20,7 @@
     CJKTCollectionView *collectionView = [[CJKTCollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:self.layout];
     [self.view addSubview:collectionView];
     self.collectionView = collectionView;
-    self.collectionView.backgroundColor = [UIColor hw_backgroudColor];
+    self.collectionView.backgroundColor = [UIColor clearColor];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     self.collectionView.emptyDataSetDelegate = self;

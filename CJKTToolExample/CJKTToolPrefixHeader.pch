@@ -11,21 +11,38 @@
 
 //  $(SRCROOT)
 
-
-#import "DefineMarco.h"
 #import "CJKTTool.h"
 #import "CJKTCategory.h"
-#import "CJKTAPIs.h"
 
+#import "DefineMarco.h"//宏定义
+#import "CJKTAPIs.h"//网络请求api
+
+#import <AFNetworking.h>
+#import <MJRefresh.h>
+#import <MJExtension.h>
+#import <MBProgressHUD.h>
 #import <Masonry.h>
-#import <YYKit.h>
+#import <SDWebImage.h>
 #import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
+//Kit
+//#import "YYKit.h"
+#import <YYKit/YYKit.h>
+#import <QMUIKit.h>
 
+
+//弹窗
+#import <FFPopup.h>
+#import <LEEAlert.h>
+#import <Toast.h>
+#import <JXTAlertManagerHeader.h>
+//仿新闻标签栏
+#import <SGPagingView.h>
 
 #import "CJKTSingleton.h"
 #import "CJKTUserModel.h"
-
 #define SINGLETON [CJKTSingleton sharedInstance]
+
+
 
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.

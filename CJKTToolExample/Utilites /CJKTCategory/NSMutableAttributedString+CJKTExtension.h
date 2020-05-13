@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param subArray 需要改变颜色的文字数组(要是有相同的 只取第一个)
  *  @return 生成的富文本
  */
-+ (NSMutableAttributedString *)pj_changeCorlorWithColor:(UIColor *)color TotalString:(NSString *)totalStr SubStringArray:(NSArray *)subArray;
++ (NSMutableAttributedString *)cjkt_changeCorlorWithColor:(UIColor *)color TotalString:(NSString *)totalStr SubStringArray:(NSArray *)subArray;
 
 #pragma mark - 单纯改变句子的字间距（需要 <CoreText/CoreText.h>）
 /**
@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param space       字间距
  *  @return 生成的富文本
  */
-+ (NSMutableAttributedString *)pj_changeSpaceWithTotalString:(NSString *)totalString Space:(CGFloat)space;
++ (NSMutableAttributedString *)cjkt_changeSpaceWithTotalString:(NSString *)totalString Space:(CGFloat)space;
 
 #pragma mark - 单纯改变段落的行间距
 /**
@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param lineSpace   行间距
  *  @return 生成的富文本
  */
-+ (NSMutableAttributedString *)pj_changeLineSpaceWithTotalString:(NSString *)totalString LineSpace:(CGFloat)lineSpace;
++ (NSMutableAttributedString *)cjkt_changeLineSpaceWithTotalString:(NSString *)totalString LineSpace:(CGFloat)lineSpace;
 
 
 #pragma mark - 同时更改行间距和字间距
@@ -50,7 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param textSpace   字间距
  *  @return 生成的富文本
  */
-+ (NSMutableAttributedString *)pj_changeLineAndTextSpaceWithTotalString:(NSString *)totalString LineSpace:(CGFloat)lineSpace textSpace:(CGFloat)textSpace;
++ (NSMutableAttributedString *)cjkt_changeLineAndTextSpaceWithTotalString:(NSString *)totalString LineSpace:(CGFloat)lineSpace textSpace:(CGFloat)textSpace;
 
 #pragma mark - 改变某些文字的颜色 并单独设置其字体
 /**
@@ -61,7 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param subArray    想要变色的字符数组
  *  @return 生成的富文本
  */
-+ (NSMutableAttributedString *)pj_changeFontAndColor:(UIFont *)font Color:(UIColor *)color TotalString:(NSString *)totalString SubStringArray:(NSArray *)subArray;
++ (NSMutableAttributedString *)cjkt_changeFontAndColor:(UIFont *)font Color:(UIColor *)color TotalString:(NSString *)totalString SubStringArray:(NSArray *)subArray;
 
 #pragma mark - 为某些文字改为链接形式
 /**
@@ -70,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param subArray    需要改变颜色的文字数组(要是有相同的 只取第一个)
  *  @return 生成的富文本
  */
-+ (NSMutableAttributedString *)pj_addLinkWithTotalString:(NSString *)totalString SubStringArray:(NSArray *)subArray;
++ (NSMutableAttributedString *)cjkt_addLinkWithTotalString:(NSString *)totalString SubStringArray:(NSArray *)subArray;
 
 
 #pragma mark - 获取某个子字符串在某个总字符串中位置数组
@@ -80,7 +80,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param subString   子字符串
  *  @return 位置数组
  */
-+ (NSMutableArray *)pj_getRangeWithTotalString:(NSString *)totalString SubString:(NSString *)subString;
++ (NSMutableArray *)cjkt_getRangeWithTotalString:(NSString *)totalString SubString:(NSString *)subString;
 @end
 
 NS_ASSUME_NONNULL_END

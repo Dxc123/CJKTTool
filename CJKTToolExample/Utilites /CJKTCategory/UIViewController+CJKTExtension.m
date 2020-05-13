@@ -21,5 +21,32 @@
             [self.navigationController popToViewController:result[0] animated:YES];
         }
     }
+    
 }
+
+/**
+iOS13适配presentViewController:问题
+ */
+
+
++(void)load{
+    
+    Method presentViewController = class_getInstanceMethod(self, @selector(presentViewController:animated:completion:));
+    Method cjkt_presentViewController = class_getInstanceMethod(self, @selector(cjkt_presentViewController:animated:completion:));
+//    交换
+    method_exchangeImplementations(presentViewController, cjkt_presentViewController);
+}
+
+
+-(void)cjkt_presentViewController:(UIViewController *)viewControllerToPresent animated: (BOOL)flag completion:(void (^ __nullable)(void))completion API_AVAILABLE(ios(5.0)){
+    if (@available(iOS 13.0,*)) {
+        viewControllerToPresent.modalPresentationStyle = UIModalPresentationFullScreen;
+        [self cjkt_presentViewController:viewControllerToPresent animated:flag completion:completion];
+    }else{
+        [self cjkt_presentViewController:viewControllerToPresent animated:flag completion:completion];
+    }
+    
+}
+
+
 @end

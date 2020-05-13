@@ -25,6 +25,28 @@ typedef NS_ENUM(NSUInteger, OpenType) {
  */
 + (BOOL)IsiPhoneX;
 
+/**
+   获取keyWindow(兼容iOS13)
+*/
++(UIWindow*)keyWindow;
+
+
+/**
+  延迟执行
+ */
+void GCD_AFTER(CGFloat time,dispatch_block_t block);
+
+/**
+ 注册通知
+ */
+void MM_AddObserver(id observer,SEL aSelector,NSNotificationName aName);
+
+/**
+ 发送通知
+ */
+void MM_PostNotification(NSNotificationName aName,id anObject);
+
+
 #pragma mark - 时间格式化
 //获取当前时间戳方法，返回10位。
 +(NSString *)getCurrentTime;

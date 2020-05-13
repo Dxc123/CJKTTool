@@ -36,7 +36,7 @@
 
 //#define iPhoneX (kScreenH == 812.f || kScreenH == 896.f ? YES : NO)
 // 根据 keyWindow safeAreaInsets 的 bottom 是否等于 34.0 或者 21.0 来判断设备是否为 iPhone X系列
-#define  iPhoneX  [CJKTTool isiPhoneX]
+#define  iPhoneX  [CJKTTool IsiPhoneX]
 // 适配刘海屏状态栏高度
 #define CF_StatusBarHeight (iPhoneX ? 44.f : 20.f)
 // 适配iPhone X 导航栏高度
@@ -136,6 +136,7 @@ Example:
 #define NOTIFICATION_USER_RELOGIN @"NOTIFICATION_USER_RELOGIN"
 // 用户威钻不足(10000),充值页面
 #define NOTIFICATION_USER_V_DIAMONDS_NOT_ENOUGH @"NOTIFICATION_USER_V_DIAMONDS_NOT_ENOUGH"
+
 
 
 

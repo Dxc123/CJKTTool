@@ -5,9 +5,11 @@
 //  Created by daixingchuang on 2020/4/10.
 //  Copyright © 2020 CJKT. All rights reserved.
 //
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+//#ifndef CJKTAPIs_h
+//#define CJKTAPIs_h
 
-#ifndef CJKTAPIs_h
-#define CJKTAPIs_h
 
 //API字符串
 
@@ -24,4 +26,4 @@ UIKIT_EXTERN NSString * const auth_get_verification_code_api;
  */
 UIKIT_EXTERN NSString * const auth_logIn_secret_api;
 
-#endif /* CJKTAPIs_h */
+//#endif /* CJKTAPIs_h */

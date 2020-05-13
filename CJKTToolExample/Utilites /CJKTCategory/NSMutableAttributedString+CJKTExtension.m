@@ -17,12 +17,12 @@
 /**
  *  单纯改变一句话中的某些字的颜色
  */
-+ (NSMutableAttributedString *)pj_changeCorlorWithColor:(UIColor *)color TotalString:(NSString *)totalStr SubStringArray:(NSArray *)subArray {
++ (NSMutableAttributedString *)cjkt_changeCorlorWithColor:(UIColor *)color TotalString:(NSString *)totalStr SubStringArray:(NSArray *)subArray {
     
     NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:totalStr];
     for (NSString *rangeStr in subArray) {
         
-        NSMutableArray *array = [self pj_getRangeWithTotalString:totalStr SubString:rangeStr];
+        NSMutableArray *array = [self cjkt_getRangeWithTotalString:totalStr SubString:rangeStr];
         
         for (NSNumber *rangeNum in array) {
             
@@ -44,7 +44,7 @@
  *
  *  @return 生成的富文本
  */
-+ (NSMutableAttributedString *)pj_changeSpaceWithTotalString:(NSString *)totalString Space:(CGFloat)space {
++ (NSMutableAttributedString *)cjkt_changeSpaceWithTotalString:(NSString *)totalString Space:(CGFloat)space {
     
     NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:totalString];
     long number = space;
@@ -65,7 +65,7 @@
  *
  *  @return 生成的富文本
  */
-+ (NSMutableAttributedString *)pj_changeLineSpaceWithTotalString:(NSString *)totalString LineSpace:(CGFloat)lineSpace {
++ (NSMutableAttributedString *)cjkt_changeLineSpaceWithTotalString:(NSString *)totalString LineSpace:(CGFloat)lineSpace {
     
     NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:totalString];
     
@@ -88,7 +88,7 @@
  *
  *  @return 生成的富文本
  */
-+ (NSMutableAttributedString *)pj_changeLineAndTextSpaceWithTotalString:(NSString *)totalString LineSpace:(CGFloat)lineSpace textSpace:(CGFloat)textSpace {
++ (NSMutableAttributedString *)cjkt_changeLineAndTextSpaceWithTotalString:(NSString *)totalString LineSpace:(CGFloat)lineSpace textSpace:(CGFloat)textSpace {
     
     NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:totalString];
     
@@ -115,7 +115,7 @@
  *
  *  @return 生成的富文本
  */
-+ (NSMutableAttributedString *)pj_changeFontAndColor:(UIFont *)font Color:(UIColor *)color TotalString:(NSString *)totalString SubStringArray:(NSArray *)subArray {
++ (NSMutableAttributedString *)cjkt_changeFontAndColor:(UIFont *)font Color:(UIColor *)color TotalString:(NSString *)totalString SubStringArray:(NSArray *)subArray {
     
     NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:totalString];
     
@@ -139,7 +139,7 @@
  *
  *  @return 生成的富文本
  */
-+ (NSMutableAttributedString *)pj_addLinkWithTotalString:(NSString *)totalString SubStringArray:(NSArray *)subArray {
++ (NSMutableAttributedString *)cjkt_addLinkWithTotalString:(NSString *)totalString SubStringArray:(NSArray *)subArray {
     
     NSMutableAttributedString *attributedStr = [[NSMutableAttributedString alloc] initWithString:totalString];
     
@@ -161,7 +161,7 @@
  *
  *  @return 位置数组
  */
-+ (NSMutableArray *)pj_getRangeWithTotalString:(NSString *)totalString SubString:(NSString *)subString {
++ (NSMutableArray *)cjkt_getRangeWithTotalString:(NSString *)totalString SubString:(NSString *)subString {
     
     NSMutableArray *arrayRanges = [NSMutableArray array];
     

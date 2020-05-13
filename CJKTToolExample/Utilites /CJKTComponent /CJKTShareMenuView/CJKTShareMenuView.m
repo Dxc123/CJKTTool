@@ -7,8 +7,8 @@
 //
 
 #import "CJKTShareMenuView.h"
-#define kScreenWidth [UIScreen mainScreen].bounds.size.width
-#define kScreenHeight [UIScreen mainScreen].bounds.size.height
+#define kkScreenWidth [UIScreen mainScreen].bounds.size.width
+#define kkScreenHeight [UIScreen mainScreen].bounds.size.height
 #define ItemH kw(100)
 #define kw(R)   (R) * (kScreenWidth) / 375.0
 @interface CJKTShareMenuView ()
@@ -27,7 +27,7 @@
         return;
     }
     
-    CJKTShareMenuView * modeView = [[CJKTShareMenuView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+    CJKTShareMenuView * modeView = [[CJKTShareMenuView alloc] initWithFrame:CGRectMake(0, 0, kkScreenWidth, kkScreenHeight)];
     modeView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.2];
     modeView.alpha = 0;
     modeView.titleArray = titleArray;
@@ -45,7 +45,7 @@
 
 - (void)setupContentView{
     
-    self.contentView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenHeight, kScreenWidth, kw(50) + ((self.titleArray.count-1)/4+1)*ItemH + kw(30)*2)];
+    self.contentView = [[UIView alloc] initWithFrame:CGRectMake(0, kkScreenHeight, kkScreenWidth, kw(50) + ((self.titleArray.count-1)/4+1)*ItemH + kw(30)*2)];
     UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:self.contentView.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(kw(20), kw(15))];
     CAShapeLayer *shapeLayer = [CAShapeLayer layer];
     shapeLayer.path = path.CGPath;
@@ -98,9 +98,8 @@
     for (int i = 0; i < self.buttonArray.count; i++) {
         
         UIButton *button = self.buttonArray[i];
-        
+//        弹簧动画
         [UIView animateWithDuration:0.7 delay:i*0.05 - i/4*0.2 usingSpringWithDamping:0.7 initialSpringVelocity:0.05 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            
             button.alpha = 1;
             button.transform = CGAffineTransformIdentity;
         } completion:^(BOOL finished) {
