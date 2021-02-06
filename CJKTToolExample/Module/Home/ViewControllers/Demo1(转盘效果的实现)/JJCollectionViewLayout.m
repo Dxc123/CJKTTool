@@ -71,8 +71,10 @@ extern CGFloat radius_;
     
     CGFloat centerX = self.collectionView.contentOffset.x + CGRectGetWidth(self.collectionView.bounds)/2.0;
     CGFloat anchorPointY = ((self.cellItemSize.height/2.0) + self.radius)/self.cellItemSize.height;
+    
     // 只计算在屏幕中的item 正切
     CGFloat theTan = atan2(CGRectGetWidth(self.collectionView.bounds)/2.0, self.radius + self.cellItemSize.height/2.0 - CGRectGetHeight(self.collectionView.bounds)/2.0);
+    
     NSInteger startIndex = 0;
     NSInteger endIndex = [self.collectionView numberOfItemsInSection:0] - 1;
     if (self.angle < -theTan) {

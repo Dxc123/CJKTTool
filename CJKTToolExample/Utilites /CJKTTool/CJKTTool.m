@@ -32,7 +32,9 @@
     
     
 }
-
+/**
+   获取keyWindow(兼容iOS13)
+*/
 +(UIWindow*)keyWindow{
     UIWindow        *foundWindow = nil;
     NSArray         *windows = [[UIApplication sharedApplication] windows];
@@ -45,31 +47,123 @@
     return foundWindow;
 }
 
-/**
-  延迟执行
- */
-void GCD_AFTER(CGFloat time,dispatch_block_t block)
-{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(time * NSEC_PER_SEC)), dispatch_get_main_queue(), block);
+
+#pragma mark -- 获取Window当前显示的ViewController
+//获取Window当前显示的ViewController
++ (UIViewController*)currentController{
+    //获得当前活动窗口的根视图
+    UIViewController* vc = [UIApplication sharedApplication].keyWindow.rootViewController;
+    
+     //方法2：遍历方法
+    while (1)
+    {
+        //根据不同的页面切换方式，逐步取得最上层的viewController
+        if ([vc isKindOfClass:[UITabBarController class]]) {
+            vc = ((UITabBarController*)vc).selectedViewController;
+        }
+        else if ([vc isKindOfClass:[UINavigationController class]]) {
+            vc = ((UINavigationController*)vc).visibleViewController;
+        }
+        else if (vc.presentedViewController) {
+            vc = vc.presentedViewController;
+        }else{
+            break;
+        }
+    }
+    
+   
+    
+    return vc;
 }
 
-/**
- 注册通知
- */
-void MM_AddObserver(id observer,SEL aSelector,NSNotificationName aName)
-{
-    [[NSNotificationCenter defaultCenter] addObserver:observer selector:aSelector name:aName object:nil];
-}
 
 /**
- 发送通知
- */
-void MM_PostNotification(NSNotificationName aName,id anObject)
+动态颜色设置
+ @param lightColor  亮色
+ @param darkColor  暗色
+*/
++ (UIColor *)generateDynamicColor:(UIColor *)lightColor darkColor:(UIColor *)darkColor {
+    if (@available(iOS 13.0, *)) {
+        UIColor *dyColor =
+            [UIColor colorWithDynamicProvider:^UIColor *_Nonnull(UITraitCollection *_Nonnull traitCollection) {
+                if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
+                    return darkColor;
+                } else {
+                    return lightColor;
+                }
+            }];
+        return dyColor;
+    } else {
+        return lightColor;
+    }
+}
+
+#pragma mark -- 快速创建UILabel
++(UILabel *)initUILabelWithFrame:(CGRect)frame
+                            font:(UIFont *)font
+                           title:(NSString *)title
+                       textColor:(UIColor *)textColor
+                   numberOfLines:(NSInteger)number
+                   textAlignment:(NSTextAlignment)textAlignment
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:aName object:anObject];
+    UILabel *lab = [[UILabel alloc] initWithFrame:frame];
+    lab.text = title;
+    lab.textColor = textColor;
+    lab.textAlignment = textAlignment;
+    lab.font = font;
+    lab.numberOfLines = number;
+    return lab;
 }
 
 
+#pragma mark --  快速创建UIButton
++ (UIButton *)initUIButtonWithFrame:(CGRect)frame
+                               font:(UIFont *)font
+                              title:(NSString *)title
+                          textColor:(UIColor *)textColor
+                         backGround:(UIColor *)bgColor
+                        borderWidth:(CGFloat)borderWidth
+                        borderColor:(UIColor *)borderColor
+                       cornerRadius:(CGFloat)cornerRadius
+{
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = frame;
+    button.backgroundColor = bgColor;
+    button.layer.borderWidth = borderWidth;
+    button.layer.borderColor = borderColor.CGColor;
+    button.layer.cornerRadius = cornerRadius;
+    button.titleLabel.font = font;
+    [button.titleLabel sizeToFit];
+    [button setTitle:title forState:UIControlStateNormal];
+    [button setTitleColor:textColor forState:UIControlStateNormal];
+    return button;
+}
+
++ (UIButton *)initUIButtonWithFrame:(CGRect)frame
+                          imgNormal:(NSString *)imgNormal
+                        imgSelected:(NSString *)imgSelected
+{
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = frame;
+    [button setImage:[UIImage imageNamed:imgNormal] forState:UIControlStateNormal];
+    [button setImage:[UIImage imageNamed:imgSelected] forState:UIControlStateSelected];
+    return button;
+}
+
+
+
+
+
+/**
+ 保存整个View为图片
+ */
++ (UIImage *)getImageViewWithView:(UIView *)view {
+    UIGraphicsBeginImageContextWithOptions(view.frame.size, NO, [UIScreen mainScreen].scale);
+    [view drawViewHierarchyInRect:view.bounds afterScreenUpdates:YES];
+    UIImage *image =  UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
 #pragma mark -- 时间格式化******/
 #pragma mark -- 获取当前时间戳
 +(NSString *)getCurrentTime{
@@ -187,7 +281,29 @@ void MM_PostNotification(NSNotificationName aName,id anObject)
     }
     return distanceStr;
 }
+/**
+ 时间转时间戳
+ */
++ (NSString *)cjkt_getTimestamp:(NSString *)time {
+    NSDateFormatter *format = [NSDateFormatter new];
+    format.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    NSDate *date = [format dateFromString:time];
+    NSInteger timeInterval = [date timeIntervalSince1970];
+    NSString *timestamp = [NSString stringWithFormat:@"%ld",(long)timeInterval];
+    return timestamp;
+}
 
+/**
+ 时间戳转时间
+ */
++ (NSString *)cjkt_getTime:(NSString *)timestamp {
+     NSDateFormatter *format = [NSDateFormatter new];
+        format.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+        NSTimeInterval timeInterval = [timestamp integerValue];
+        NSDate *date = [NSDate dateWithTimeIntervalSince1970:timeInterval];
+        NSString *time = [format stringFromDate:date];
+        return time;
+}
 /***#pragma mark -- 时间格式化******/
 /********************************/
 
@@ -269,72 +385,7 @@ void MM_PostNotification(NSNotificationName aName,id anObject)
     return NO;
 }
 
-#pragma mark -- 快速创建UILabel
-+(UILabel *)initUILabelWithFrame:(CGRect)frame title:(NSString *)title numberOfLines:(NSInteger)number textAlignment:(NSTextAlignment)textAlignment textColor:(UIColor *)textColor font:(UIFont *)font{
-    UILabel *lab = [[UILabel alloc] initWithFrame:frame];
-    lab.text = title;
-    lab.textColor = textColor;
-    lab.textAlignment = textAlignment;
-    lab.font = font;
-    lab.numberOfLines = number;
-    return lab;
-}
 
-
-#pragma mark --  快速创建UIButton
-+ (UIButton *)initUIButtonWithFrame:(CGRect)frame title:(NSString *)title tag:(NSInteger)tag backGround:(UIColor *)bgColor textColor:(UIColor *)textColor borderWidth:(CGFloat)borderWidth borderColor:(UIColor *)borderColor cornerRadius:(CGFloat)cornerRadius font:(UIFont *)font
-{
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = frame;
-    button.tag = tag;
-    button.backgroundColor = bgColor;
-    button.layer.borderWidth = borderWidth;
-    button.layer.borderColor = borderColor.CGColor;
-    button.layer.cornerRadius = cornerRadius;
-    button.titleLabel.font = font;
-    [button.titleLabel sizeToFit];
-    [button setTitle:title forState:UIControlStateNormal];
-    [button setTitleColor:textColor forState:UIControlStateNormal];
-    return button;
-}
-
-+ (UIButton *)initUIButtonWithFrame:(CGRect)frame imgNormal:(NSString *)imgNormal imgSelected:(NSString *)imgSelected{
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = frame;
-    [button setImage:[UIImage imageNamed:imgNormal] forState:UIControlStateNormal];
-    [button setImage:[UIImage imageNamed:imgSelected] forState:UIControlStateSelected];
-    return button;
-}
-
-
-
-#pragma mark -- 获取Window当前显示的ViewController
-//获取Window当前显示的ViewController
-+ (UIViewController*)currentController{
-    //获得当前活动窗口的根视图
-    UIViewController* vc = [UIApplication sharedApplication].keyWindow.rootViewController;
-    
-     //方法2：遍历方法
-    while (1)
-    {
-        //根据不同的页面切换方式，逐步取得最上层的viewController
-        if ([vc isKindOfClass:[UITabBarController class]]) {
-            vc = ((UITabBarController*)vc).selectedViewController;
-        }
-        else if ([vc isKindOfClass:[UINavigationController class]]) {
-            vc = ((UINavigationController*)vc).visibleViewController;
-        }
-        else if (vc.presentedViewController) {
-            vc = vc.presentedViewController;
-        }else{
-            break;
-        }
-    }
-    
-   
-    
-    return vc;
-}
 
 
 
@@ -355,64 +406,6 @@ void MM_PostNotification(NSNotificationName aName,id anObject)
     alertView.dismissInterval = timeInterval;
     alertView.message = message;
     
-}
-#pragma mark---- 16进制数 --> 颜色
-//16进制颜色(html颜色值)字符串转为UIColor
-
-+(UIColor *) hexStringToColor: (NSString *) stringToConvert
-{
-    NSString *cString = [[stringToConvert stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
-    if ([cString hasPrefix:@"#"]) cString = [cString substringFromIndex:1];
-    if ([cString length] != 6) return [UIColor blackColor];
-    NSRange range;
-    range.location = 0;
-    range.length = 2;
-    NSString *rString = [cString substringWithRange:range];
-    range.location = 2;
-    NSString *gString = [cString substringWithRange:range];
-    range.location = 4;
-    NSString *bString = [cString substringWithRange:range];
-    // Scan values
-    unsigned int r, g, b;
-    [[NSScanner scannerWithString:rString] scanHexInt:&r];
-    [[NSScanner scannerWithString:gString] scanHexInt:&g];
-    [[NSScanner scannerWithString:bString] scanHexInt:&b];
-    return [UIColor colorWithRed:((float) r / 255.0f)
-                           green:((float) g / 255.0f)
-                            blue:((float) b / 255.0f)
-                           alpha:1.0f];
-}
-#pragma mark --  16进制数 --> 颜色
-//根据@"#eef4f4"得到UIColor
-+ (UIColor *)uiColorFromString:(NSString *) clrString
-{
-    return [self uiColorFromString:clrString alpha:1.0];
-}
-+ (UIColor *)uiColorFromString:(NSString *) clrString alpha:(double)alpha
-{
-    if ([clrString length] == 0) {
-        return [UIColor clearColor];
-    }
-    
-    if ( [clrString caseInsensitiveCompare:@"clear"] == NSOrderedSame) {
-        return [UIColor clearColor];
-    }
-    
-    if([clrString characterAtIndex:0] == 0x0023 && [clrString length]<8)
-    {
-        const char * strBuf= [clrString UTF8String];
-        
-        NSInteger iColor = strtol((strBuf+1), NULL, 16);
-        typedef struct colorByte
-        {
-            unsigned char b;
-            unsigned char g;
-            unsigned char r;
-        }CLRBYTE;
-        CLRBYTE * pclr = (CLRBYTE *)&iColor;
-        return [UIColor colorWithRed:((double)pclr->r/255.f) green:((double)pclr->g/255.f) blue:((double)pclr->b/255) alpha:alpha];
-    }
-    return [UIColor blackColor];
 }
 
 #pragma mark - 格式化时间  （YYYY-MM-dd HH:mm:ss组合 ）
@@ -478,6 +471,11 @@ void MM_PostNotification(NSNotificationName aName,id anObject)
 
 
 #pragma mark -- 判断某个界面是否是第一次加载
+/**
+判断某个界面是否是第一次加载
+@param key 某个界面的标志
+@return yes：第一次加载 no：反之
+*/
 +(BOOL)judgeIsFirstLoad:(NSString *)key {
     
     BOOL is_second = [[NSUserDefaults standardUserDefaults] boolForKey:key];

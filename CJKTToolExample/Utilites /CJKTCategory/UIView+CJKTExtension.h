@@ -48,6 +48,11 @@ NS_ASSUME_NONNULL_BEGIN
  获取当前View的控制器对象
  */
 -(UIViewController *)cjkt_getCurrentViewController;
+#pragma mark -- 把view加在window上
+/**
+ 把view加在window上
+ */
+- (void)cjkt_addToWindow;
 
 #pragma mark -- 屏幕截图
 /**
@@ -118,11 +123,21 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)cjkt_startTrans180DegreeAnimation;
 
 
-#pragma mark -- 把view加在window上
-/**
- 把view加在window上
- */
-- (void)cjkt_addToWindow;
+//淡入
+- (void)fadeIn;
+- (void)fadeInOnComplet:(void(^)(BOOL))complet;
+//淡出
+- (void)fadeOut;
+- (void)fadeOutOnComplet:(void(^)(BOOL))complet;
+
+//移除视图
+- (void)removeAllSubviews;
+- (void)removeSubviewWithTag:(int)tag;
+- (void)removeSubviewExceptTag:(int)tag;
+
+
+
+
 
 
 

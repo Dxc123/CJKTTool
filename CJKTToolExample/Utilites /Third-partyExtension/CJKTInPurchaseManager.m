@@ -9,7 +9,6 @@
 #import "CJKTInPurchaseManager.h"
 #import "CJKTTool.h"
 @interface CJKTInPurchaseManager() {
-    
     NSString *_productStr;
     NSString *_transID;
     NSString *_receiptString;
@@ -31,10 +30,7 @@
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        
         payManager = [[super allocWithZone:NULL] init];
-
-        
     });
     
     return payManager;

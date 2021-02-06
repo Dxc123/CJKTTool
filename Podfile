@@ -1,20 +1,21 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '10.0'
-
+ platform :ios, '10.0'
+source 'https://github.com/CocoaPods/Specs.git'
 inhibit_all_warnings!
 use_frameworks!
-source 'https://github.com/CocoaPods/Specs.git'
+
 target 'CJKTToolExample' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
 
   # Pods for CJKTToolExample
 pod 'AFNetworking',:inhibit_warnings => true
 pod 'XMNetworking'
+#pod 'CCNetworkKit'
 pod 'Reachability'
-
 pod 'MJRefresh'
 pod 'MJExtension'
 pod 'MBProgressHUD'
+pod 'SVProgressHUD'
 pod 'SDWebImage'
 pod 'Masonry'
 
@@ -22,15 +23,16 @@ pod 'Masonry'
 pod 'LEEAlert' #链式语法、优雅的可自定义Alert ActionSheet
 pod 'FFPopup'#pop弹窗容器
 pod 'JXTAlertManager'#UIAlertView/UIAlertController便捷调用工具
-#pod 'YBPopupMenu' #pop弹窗菜单
+pod 'YBPopupMenu' #pop弹窗菜单
 pod 'Toast'
 
 pod 'DZNEmptyDataSet'#空白展位图
-pod "Texture"#Facebook团队开源：用于优化APP界面流畅度的库
-pod 'IGListKit', '~> 4.0.0'#Facebook团队开源：UICollectionView框架
+#pod "Texture"#Facebook团队开源：用于优化APP界面流畅度的库
+#pod 'IGListKit', '~> 4.0.0'#Facebook团队开源：UICollectionView框架
 
 #pod 'PYPhotoBrowser'# 图片浏览器
 #pod 'TZImagePickerController'#iOS8 and later 支持多选、选原图和视频的图片选择器
+#pod 'ISVImageScrollView'#图像预览组件：支持缩放、滚动和旋转
 #pod 'IQKeyboardManager'# 键盘管理
 #pod 'CHTCollectionViewWaterfallLayout'# 瀑布流
 #pod 'ActionSheetPicker-3.0'# 选择器
@@ -50,14 +52,15 @@ pod 'LSAnimator'#动画库(封装核心动画)
 
 #内购
 pod 'IAPHelper'
-#pod 'RMStore'
+pod 'RMStore'
 
 #数据库：
-#pod 'FMDB'
-#pod 'BGFMDB'
+pod 'FMDB'
+pod 'BGFMDB'
 #pod 'JQFMDB'
 #pod 'MMKV' #微信开源,基于 mmap 内存映射的 key-value 组件
 #pod 'SAMKeychain' #钥匙串存取数据
+pod 'PINCache','3.0.1'#缓存
 
 # 文件压缩与解压
 #pod 'SSZipArchive'
@@ -65,11 +68,12 @@ pod 'IAPHelper'
 pod "MMWebView"#封装WKWebView
 
 #Kit集合
-pod 'YYKit'
+#pod 'YYKit'# 手动导入了，文件分类清晰(并且标出常用的注释)
 pod 'QMUIKit'#腾讯QMUI团队开源
 
 #DEBUG辅助工具
 pod 'LookinServer', :configurations => ['Debug'] #腾讯QMUI团队开源UI调试软件 配合MAC 端Lookin使用
+#pod  'YKWoodpecker'   #优酷团队开源debug工具啄幕鸟
 # FaceBook 内存分析工具 其中包括了：FBAllocationTracker 和 FBRetainCycleDetector两个工具
 #pod 'FBMemoryProfiler'
 

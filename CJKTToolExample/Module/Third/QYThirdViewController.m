@@ -8,68 +8,124 @@
 
 #import "QYThirdViewController.h"
 #import "CRTimer.h"
-#import <FFPopup/FFPopup.h>
-#import "CJKTTool.h"
-#import "CJKTCategory.h"
 #import "AnimationKit.h"
+#import "NSKeyedArchiverDemo.h"
 @interface QYThirdViewController ()
+<UITableViewDelegate,UITableViewDataSource>
+@property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong)NSArray *titles;
+@property(nonatomic,strong)NSArray *classNames;
+
 @property (nonatomic, strong) UIButton *timeBtn;
 @property (nonatomic, strong) UIView *contentView;
+
 @end
 
 @implementation QYThirdViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UILabel *lab1 = [CJKTTool initUILabelWithFrame:CGRectMake(20, 100, 150, 40) title:@"你好你哈哈哦哦" numberOfLines:0 textAlignment:NSTextAlignmentCenter textColor:[UIColor redColor] font:[UIFont systemFontOfSize:15]];
-      
-    lab1.attributedText = [NSMutableAttributedString  cjkt_addLinkWithTotalString:lab1.text SubStringArray:@[@"哈哈哦哦"]];
-    [self.view addSubview:lab1];
+    self.view.backgroundColor = [UIColor whiteColor];
+//    UILabel *lab1 = [CJKTTool initUILabelWithFrame:CGRectMake(20, 100, 200, 40) font:[UIFont systemFontOfSize:15] title:@"哈哈哦哦" textColor:[UIColor redColor] numberOfLines:0 textAlignment:NSTextAlignmentCenter];
+//
+//    lab1.attributedText = [NSMutableAttributedString  cjkt_addLinkWithTotalString:lab1.text SubStringArray:@[@"哈哈哦哦"]];
+//    [self.view addSubview:lab1];
+//
+//    UIButton *btn = [CJKTTool initUIButtonWithFrame:CGRectMake(20, 100, 200, 40) font:[UIFont systemFontOfSize:15] title:@"哈哈哦哦" textColor:[UIColor cyanColor] backGround:[UIColor whiteColor] borderWidth:0 borderColor:[UIColor clearColor] cornerRadius:0];
+//    
+//    btn.titleLabel.attributedText = [NSMutableAttributedString  cjkt_addLinkWithTotalString:lab1.text SubStringArray:@[@"哈哈哦哦"]];
+//    [self.view addSubview:btn];
+//    
+//    UIButton *timeBtn = [CJKTTool initUIButtonWithFrame:CGRectMake(20, 250, 40, 40) imgNormal:@"icon_next" imgSelected:@""];//login_icon_hides
+//    [timeBtn addTarget:self action:@selector(timeBtnActione:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:timeBtn];
+//    self.timeBtn = timeBtn;
+//    
+//    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+//    button.backgroundColor = [UIColor cyanColor];
+//    button.titleLabel.font = [UIFont systemFontOfSize:15];
+//    [button setTitle:@"点击" forState:UIControlStateNormal];
+//    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    [button addTarget:self action:@selector(buttonClicked) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:button];
+////    button.frame = CGRectMake(20, 330, 200, 40);
+//    
+//    button.m_height(40).m_width(200).m_top(330).m_left(20);
+//    
+//    UIButton *button2 = [UIButton buttonWithType:UIButtonTypeCustom];
+//    button2.backgroundColor = [UIColor cyanColor];
+//    button2.titleLabel.font = [UIFont systemFontOfSize:15];
+//    [button2 setTitle:@"点击" forState:UIControlStateNormal];
+//    [button2 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    //       [button2 addTarget:self action:@selector(button2Clicked) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:button2];
     
-    UIButton *btn = [CJKTTool initUIButtonWithFrame:CGRectMake(20, 200, 200, 40) title:@"你好你哈哈哦哦" tag:0 backGround:[UIColor clearColor] textColor:[UIColor blackColor] borderWidth:0 borderColor:[UIColor clearColor] cornerRadius:0 font:[UIFont systemFontOfSize:15]];
     
-    btn.titleLabel.attributedText = [NSMutableAttributedString  cjkt_addLinkWithTotalString:lab1.text SubStringArray:@[@"哈哈哦哦"]];
-    [self.view addSubview:btn];
-    
-    UIButton *timeBtn = [CJKTTool initUIButtonWithFrame:CGRectMake(20, 250, 40, 40) imgNormal:@"icon_next" imgSelected:@""];//login_icon_hides
-    [timeBtn addTarget:self action:@selector(timeBtnActione:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:timeBtn];
-    self.timeBtn = timeBtn;
-    
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.backgroundColor = [UIColor cyanColor];
-    button.titleLabel.font = [UIFont systemFontOfSize:15];
-    [button setTitle:@"点击" forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(buttonClicked) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:button];
-    button.frame = CGRectMake(20, 330, 200, 40);
-    
-    
-    
-    
+    self.navigationItem.title = @"自定义封装使用示例";
+    self.titles =@[
+         @"Mode归档Demo",
+         @"ActionSheetDemo",
+         @"切换语言",
+     ];
 
+    self.classNames = @[
+        @"NSKeyedArchiverDemo",
+        @"ActionSheetDemo",
+        @"ChangeLangueViewController",
+    ];
     
+    [self.view addSubview:self.tableView];
+}
+- (UITableView *)tableView {
+    if(!_tableView) {
+        _tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCell"];
+        _tableView.tableFooterView = [UIView new];
+    }
+    return _tableView;
+}
+
+#pragma mark - UITableViewDataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return self.classNames.count;
     
 }
--(void)buttonClicked{
-    NSLog(@"点击");
-    FFPopup *popup = [FFPopup popupWithContentView:self.contentView];
-          popup.showType = FFPopupShowType_GrowIn;
-          popup.dismissType = FFPopupDismissType_SlideOutToBottom;
-          popup.maskType = FFPopupMaskType_None;
-          popup.shouldDismissOnBackgroundTouch = YES;
-          popup.shouldDismissOnContentTouch = NO;
-        FFPopupLayout layout = FFPopupLayoutMake(FFPopupHorizontalLayout_Center, FFPopupVerticalLayout_Center);
-//     [popup showWithLayout:layout duration: 0];
-    
-    FFPopup *popup2 = [FFPopup popupWithContentView:self.contentView showType:FFPopupShowType_BounceInFromBottom dismissType:FFPopupDismissType_SlideOutToBottom maskType:FFPopupMaskType_None dismissOnBackgroundTouch:YES dismissOnContentTouch:YES];
-       FFPopupLayout layout2 = FFPopupLayoutMake(FFPopupHorizontalLayout_Center, FFPopupVerticalLayout_Bottom);
-    
-    
-          [popup2 showWithLayout:layout2 duration: 0];
-         
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 1;
 }
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.textLabel.text = self.titles[indexPath.section];;
+    return cell;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 44;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (tableView.isEditing) {
+        return;
+    }
+    NSString *className = self.classNames[indexPath.section];
+    Class class = NSClassFromString(className);
+    if (class) {
+        UIViewController *ctrl = class.new;
+        ctrl.title = self.classNames[indexPath.section];
+        
+        [self.navigationController pushViewController:ctrl animated:YES];
+    }
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+}
+
+
 -(void)timeBtnActione:(UIButton *)sender{
     NSLog(@"点击timeBtn");
     sender.selected = !sender.selected;
@@ -78,9 +134,6 @@
     }else{
         [self.timeBtn rotationWithAngle_ML:0];
     }
-   
-    
-    
     
 }
 -(UIView *)contentView{

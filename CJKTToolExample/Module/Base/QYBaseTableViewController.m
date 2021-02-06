@@ -9,7 +9,6 @@
 #import "QYBaseTableViewController.h"
 #import <UIScrollView+EmptyDataSet.h>
 #import <MBProgressHUD.h>
-#import "HWNetworkStatus.h"
 
 @interface QYBaseTableViewController ()
 @property (nonatomic,strong) HWFlashView *flashView;
@@ -162,7 +161,7 @@
     if (!self.stopShowEmpty) {
         NSString *string;
         // 先看是否是有网络
-        if (![[HWNetworkStatus shareNetworkStatus] isReachable]) {
+        if (![[YYReachability reachability] isReachable]) {
             string = @"网络好像开小差了,请检查设置";
         }else{
             string = self.emptyString?self.emptyString:@"没有数据";
@@ -179,15 +178,15 @@
         return nil;
     }
     // 先看是否是有网络
-    if (![[HWNetworkStatus shareNetworkStatus] isReachable]) {
+    if (![[YYReachability reachability] isReachable]) {
         self.haveNoNetWorkStatus = YES;
-        return KIMAGE(@"network_404");
+        return kIMAGE(@"network_404");
     }
     self.haveNoNetWorkStatus = NO;
     if (self.emptyImage) {
         return self.emptyImage;
     }else {
-        return KIMAGE(@"table_view_empty");
+        return kIMAGE(@"table_view_empty");
     }
 }
 - (BOOL)emptyDataSetShouldAllowTouch:(UIScrollView *)scrollView {

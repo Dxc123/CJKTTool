@@ -292,7 +292,7 @@
 
 /******************************/
 #pragma mark - 根据颜色生成图片
-+ (UIImage *)image_WithColor:(nullable UIColor *)color {
++ (UIImage *)image_WithColor:(UIColor *)color {
     color = nil == color ? [UIColor blackColor] : color;
     // 矩形描述
     CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
@@ -311,7 +311,26 @@
     return theImage;
 }
 
-
+/**
+根据纯颜色生成图片
+*/
++ (UIImage *)cjkt_imageWithColor:(UIColor *)aColor
+{
+    return [UIImage cjkt_imageWithColor:aColor withFrame:CGRectMake(0, 0, 1, 1)];
+}
+/**
+根据纯颜色、frame生成图片
+*/
++ (UIImage *)cjkt_imageWithColor:(UIColor *)aColor withFrame:(CGRect)frame
+{
+    UIGraphicsBeginImageContext(frame.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, aColor.CGColor);
+    CGContextFillRect(context, frame);
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
 #pragma mark - 给图片添加文字水印
 - (UIImage *)image_WithWaterMarkText:(nullable NSString *)text textPoint:(CGPoint)point attributedString:(nullable NSDictionary *)attributed {
     //1.开启上下文  尺寸 / 透明度 / 缩放
@@ -385,4 +404,68 @@
     return newImage;
 }
 
+/**
+ 修正图片转向
+ */
++ (UIImage *)cjkt_fixOrientation:(UIImage *)aImage {
+    
+if (aImage.imageOrientation == UIImageOrientationUp) return aImage;
+    CGAffineTransform transform = CGAffineTransformIdentity;
+    switch (aImage.imageOrientation) {
+            case UIImageOrientationDown:
+            case UIImageOrientationDownMirrored:
+             transform =CGAffineTransformTranslate(transform, aImage.size.width, aImage.size.height);
+             transform =CGAffineTransformRotate(transform,M_PI);
+             break;
+            case UIImageOrientationLeft:
+            case UIImageOrientationLeftMirrored:
+            transform =CGAffineTransformTranslate(transform, aImage.size.width,0);
+            transform =CGAffineTransformRotate(transform,M_PI_2);
+            break;
+            case UIImageOrientationRight:
+            case UIImageOrientationRightMirrored:
+            transform =CGAffineTransformTranslate(transform,0, aImage.size.height);
+            transform =CGAffineTransformRotate(transform, -M_PI_2);
+            break;
+            default:
+            break;
+    }
+    switch (aImage.imageOrientation) {
+            case UIImageOrientationUpMirrored:
+            case UIImageOrientationDownMirrored:
+                transform =CGAffineTransformTranslate(transform, aImage.size.width,0);
+                transform =CGAffineTransformScale(transform, -1,1);
+                break;
+            case UIImageOrientationLeftMirrored:
+            case UIImageOrientationRightMirrored:
+                transform =CGAffineTransformTranslate(transform, aImage.size.height,0);
+                transform =CGAffineTransformScale(transform, -1,1);
+            break;
+            default:
+            break;
+            
+    }
+    CGContextRef ctx = CGBitmapContextCreate(NULL, aImage.size.width, aImage.size.height,
+                                             CGImageGetBitsPerComponent(aImage.CGImage),0,
+                                                 CGImageGetColorSpace(aImage.CGImage),CGImageGetBitmapInfo(aImage.CGImage));
+    CGContextConcatCTM(ctx, transform);
+    switch (aImage.imageOrientation) {
+        case UIImageOrientationLeft:
+        case UIImageOrientationLeftMirrored:
+        case UIImageOrientationRight:
+        case UIImageOrientationRightMirrored:
+            CGContextDrawImage(ctx,CGRectMake(0,0,aImage.size.height,aImage.size.width), aImage.CGImage);
+            break;
+            default:
+            CGContextDrawImage(ctx,CGRectMake(0,0,aImage.size.width,aImage.size.height), aImage.CGImage);
+            break;
+}
+    
+    
+    CGImageRef cgimg = CGBitmapContextCreateImage(ctx);
+    UIImage*img = [UIImage imageWithCGImage:cgimg];
+    CGContextRelease(ctx);
+    CGImageRelease(cgimg);
+    return img;
+}
 @end

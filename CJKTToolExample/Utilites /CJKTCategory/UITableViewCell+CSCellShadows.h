@@ -12,14 +12,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UITableViewCell (CSCellShadows)
 
-/*
- / 给tableview section 添加圆角
- /
+/**
+ 给tableview section 添加圆角
  */
 - (void)addShadowToSectionTableView:(UITableView *)tableView
                         atIndexPath:(NSIndexPath *)indexPath;
 
-/** adds a drop shadow to the background view of the (grouped) cell */
+/**
+ 给tableview cell添加圆角
+ */
 - (void)addShadowToCellInTableView:(UITableView *)tableView
                        atIndexPath:(NSIndexPath *)indexPath;
 

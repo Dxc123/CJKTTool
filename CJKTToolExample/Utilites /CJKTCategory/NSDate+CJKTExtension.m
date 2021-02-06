@@ -17,6 +17,7 @@
 @implementation NSDate (CJKTExtension)
 #pragma mark - 获取系统当前的时间戳，即当前时间距1970的秒数（以毫秒为单位）
 + (NSString *)cjkt_timestamp {
+    //比标准UTC增加或减少秒
     NSDate *date = [NSDate dateWithTimeIntervalSinceNow:0];
     /** 当前时间距1970的秒数。*1000 是精确到毫秒，不乘就是精确到秒 */
     NSTimeInterval interval = [date timeIntervalSince1970] * 1000;
@@ -32,7 +33,7 @@
 
 #pragma mark - 按指定格式获取当前的时间
 + (NSString *)cjkt_currentDateStringWithFormat:(NSString *)formatterStr {
-    // 获取系统当前时间
+    // 获取系统当前时间(UTC时间，0时区)
     NSDate *currentDate = [NSDate date];
     // 用于格式化NSDate对象
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];

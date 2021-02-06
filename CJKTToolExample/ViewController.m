@@ -7,20 +7,7 @@
 //
 
 #import "ViewController.h"
-
 //  $(SRCROOT)
-#import "CJKTTool.h"
-#import "CJKTCategory.h"
-#import "CJKTAPIs.h"
-
-#import <Masonry.h>
-#import "YYKit.h"
-#import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
-
-
-#import "CJKTSingleton.h"
-#import "CJKTUserModel.h"
-
 @interface ViewController ()
 
 @end
@@ -29,7 +16,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
 }
 
    

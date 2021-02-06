@@ -7,9 +7,6 @@
 //
 
 #import "QYLoginViewController.h"
-#import "CJKTSingleton.h"
-#import "CJKTUserModel.h"
-
 @interface QYLoginViewController ()
 
 @end
@@ -20,6 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    self.title = @"QYLoginViewController";
 /**
  
  CJKTUserModel *user = [HWUser mj_objectWithKeyValues:responseObject];

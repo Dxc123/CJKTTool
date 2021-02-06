@@ -8,6 +8,9 @@
 
 #import "AppDelegate.h"
 #import "QYTabBarViewController.h"
+#import "QYLoginViewController.h"
+#import "QYNavigationViewController.h"
+#import "KSGuaidViewManager.h"
 @interface AppDelegate ()
 
 @end
@@ -16,11 +19,25 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    self.window=[[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.backgroundColor=[UIColor whiteColor];
+    self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    
-    self.window.rootViewController=[QYTabBarViewController new]; ;
+    [LanguageConfig setSystemLanguage];
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"FirstLaunchKey"]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"FirstLaunchKey"];
+        CJKTLog(@"第一次进入");
+//       KSGuaidManager.images = @[[UIImage imageNamed:@"guid01"],
+//                                    [UIImage imageNamed:@"guid02"],
+//                                    [UIImage imageNamed:@"guid03"],
+//                                    [UIImage imageNamed:@"guid04"]];
+//          KSGuaidManager.shouldDismissWhenDragging = YES;
+//          [KSGuaidManager begin];
+          self.window.rootViewController = [[QYNavigationViewController alloc] initWithRootViewController:[QYLoginViewController new]]; ;
+    }else {
+          CJKTLog(@"再次进入");
+           self.window.rootViewController = [QYTabBarViewController new]; ;
+    }
+   
     
   
     return YES;

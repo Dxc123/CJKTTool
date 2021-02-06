@@ -7,190 +7,94 @@
 //
 
 #import "QYSecondViewController.h"
-
-
-#define RedColor [UIColor redColor]
-#define BlueColor [UIColor blueColor]
-#define BlackColor [UIColor blackColor]
-
-#define SFONT(a) [UIFont systemFontOfSize:a]
-
-#import "CJKTTool.h"
-#import "CJKTShareMenuView.h"
-#import "CJKTActionSheet.h"
-#import "CJKTAlert.h"
-#import "CJKTAgrementView.h"
-#import "TestViewController.h"
-#import <Masonry/Masonry.h>
-@interface QYSecondViewController ()<CJKTActionSheetDelegate>
-
+#import "FFPopupDemo.h"
+#import "YYLabelDemo.h"
+#import "YYCacheManager.h"
+#import "ExternMethods.h"
+@interface QYSecondViewController ()
+<UITableViewDelegate,UITableViewDataSource>
+@property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong)NSArray *titles;
+@property(nonatomic,strong)NSArray *classNames;
 @end
 
 @implementation QYSecondViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(100, 100, 200, 40);
-    [self.view addSubview:btn];
-    [btn setTitle:@"分享" forState:UIControlStateNormal];
-    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(ButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.title = @"第三方库使用示例";
+    self.titles =@[
+         @"FFPopupDemo",
+         @"YYLabelDemo"
+     ];
+
+    self.classNames = @[
+        @"FFPopupDemo",
+        @"YYLabelDemo",
+    ];
     
-    UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn2.frame = CGRectMake(100, 250, 200, 40);
-    [self.view addSubview:btn2];
-    [btn2 setTitle:@"CJKTActionSheet" forState:UIControlStateNormal];
-    [btn2 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [btn2 addTarget:self action:@selector(Button2Clicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.tableView];
     
-    UIButton *btn3 = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn3.frame = CGRectMake(100, 300, 200, 40);
-    [self.view addSubview:btn3];
-    [btn3 setTitle:@"CJKTAlert" forState:UIControlStateNormal];
-    [btn3 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [btn3 addTarget:self action:@selector(btn3Clicked) forControlEvents:UIControlEventTouchUpInside];
+    kUserDefaultsSaveKey(@"1112222", @"myKey");
     
-    UIButton *btn4 = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn4.frame = CGRectMake(100, 400, 200, 40);
-    [self.view addSubview:btn3];
-    [btn4 setTitle:@"CJKTAlert" forState:UIControlStateNormal];
-    [btn4 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [btn4 addTarget:self action:@selector(btn4Clicked) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    
-    
-      
-    //        跳转QQ聊天界面
-    BOOL isCanOpen = [CJKTTool openOtherAppWithOpenType:OpenTypeQQ];
-    if (isCanOpen == YES) {
-        NSLog(@"跳转QQ");
-        
-        UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"mqq://im/chat?chat_type=wpa&uin=%@&version=1&src_type=web",@"1462711230"]];
-        NSURLRequest *request = [NSURLRequest requestWithURL:url];
-        [webView loadRequest:request];
-        [self.view addSubview:webView];
-    }else{
-        NSLog(@"");
-        
+}
+
+- (UITableView *)tableView {
+    if(!_tableView) {
+        _tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCell"];
+        _tableView.tableFooterView = [UIView new];
     }
+    return _tableView;
+}
+
+#pragma mark - UITableViewDataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return self.classNames.count;
     
-    NSArray *buleNumArr = @[@"1",@"2",@"5",@"6"];
-    NSArray *kaiBuleNumArr = @[@"2",@"3",@"6"];
-    
-    for (int y = 0 ; y<buleNumArr.count; y++) {
-        
-        for (int z = 0 ; z< kaiBuleNumArr.count; z++) {
-            if (buleNumArr[y] == kaiBuleNumArr[z]) {
-                NSLog(@"buleNumArr[y]= %@",buleNumArr[y]);
-                
-            }
-            
-        }
-        
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.textLabel.text = self.titles[indexPath.section];;
+    return cell;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 44;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (tableView.isEditing) {
+        return;
     }
-    
-    //    运用正则的API得出两个数组中相同与不同的数据
-    //    1 查找相同的数据
-    NSArray * arr2 = @[@4,@3,@2,@1];
-    NSArray * arr1 = @[@2,@3,@4,@5];
-    NSPredicate * filterPredicate_same = [NSPredicate predicateWithFormat:@"SELF IN %@",arr1];
-    NSArray * filter_no = [arr2 filteredArrayUsingPredicate:filterPredicate_same];
-    NSLog(@"%@",filter_no);
-    
-    //    2 查找不同的数据
-    
-    //    NSArray * arr2 = @[@4,@3,@2,@1];
-    //    NSArray * arr1 = @[@2,@3,@4,@5];
-    //    //找到在arr2中不在数组arr1中的数据
-    //    NSPredicate * filterPredicate1 = [NSPredicate predicateWithFormat:@"NOT (SELF IN %@)",arr1];
-    //    NSArray * filter1 = [arr2 filteredArrayUsingPredicate:filterPredicate1];
-    //    //找到在arr1中不在数组arr2中的数据
-    //    NSPredicate * filterPredicate2 = [NSPredicate predicateWithFormat:@"NOT (SELF IN %@)",arr2];
-    //    NSArray * filter2 = [arr1 filteredArrayUsingPredicate:filterPredicate2];
-    //    //拼接数组
-    //    NSMutableArray *array = [NSMutableArray arrayWithArray:filter1];
-    //    [array addObjectsFromArray:filter2];
-    //    NSLog(@"%@",array);
-    //
-    //
-    NSString *stttr = @"10%";
-    NSLog(@"[stttr integerValue] = %ld" ,(long)[stttr integerValue]);
-    NSString *tempStr = [NSString stringWithFormat:@"%ld%%" ,100- [stttr integerValue] ];
-    NSLog(@"tempStr = %@" ,tempStr);
+    NSString *className = self.classNames[indexPath.section];
+    Class class = NSClassFromString(className);
+    if (class) {
+        UIViewController *ctrl = class.new;
+        ctrl.title = self.classNames[indexPath.section];
+        
+        [self.navigationController pushViewController:ctrl animated:YES];
+    }
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     
 }
--(void)ButtonClicked{
-    //  ;@[@"拍发票",@"看照片",@"拍发票",@"看照片"]
-    [CJKTShareMenuView showShareMenuViewWithTitleArray:@[@"拍发票",@"看照片",@"拍发票",@"看照片"] imgNameArray:@[@"拍发票",@"看照片",@"拍发票",@"看照片"] completionHandler:^(CJKTSharePlatformType platformType) {
-        NSLog(@"platformType = %ld",(long)platformType);
-    }];
-    
-    
-}
--(void)Button2Clicked{
-    // 初始化 默认样式
-    CJKTActionSheet *actionSheet = [[CJKTActionSheet alloc] initWithTitle:@"温馨提示" sheetTitles:@[@"sheet1",@"sheet2"] sheetIcons:@[] cancleBtnTitle:@"确定" sheetStyle:(CJKTActionSheetDefault) ];
-    
-    //
-    //     文字+图标样式 要为actionSheet的iconArr属性赋值
-    //    CJKTActionSheet *actionSheet = [[CJKTActionSheet alloc] initWithTitle:@"图标+标题" sheetTitles:@[@"sheet1",@"sheet2",@"sheet3"]  sheetIcons:@[@"test01",@"test02",@"test03"] cancleBtnTitle:@"取消" sheetStyle:(CJKTActionSheetIconAndTitle)];
-    
-    // 图标样式 要为actionSheet的iconArr属性赋值
-    //        CJKTActionSheet *actionSheet = [[CJKTActionSheet alloc] initWithTitle:@"图标" sheetTitles:@[] sheetIcons:@[@"test01",@"test02",@"test03"] cancleBtnTitle:@"取消" sheetStyle:(CJKTActionSheetIcon) ];
-    
-    //    Block
-    //    actionSheet.ActionSheetClickBlock = ^(NSInteger actionSheetIndex) {
-    //         NSLog(@"Block点击了sheet%ld",actionSheetIndex+1);
-    //    };
-    //
-    //    actionSheet.ActionSheetCancelClickBlock = ^{
-    //
-    //        NSLog(@"点击");;
-    //    };
-    
-    actionSheet.delegate = self;
-    
-    [actionSheet show];
-}
--(void)btn3Clicked{
-    //CJKTAlert 自定义
-    CJKTAlert *alert = [[CJKTAlert alloc] initWithTitle:@"重大新闻" message:@"上海港货物吞吐量和集装箱吞吐量均居世界第一，设有中国大陆首个自贸区中国（上海）自由贸易试验区。上海市与安徽、江苏、浙江共同构成了长江三角洲城市群，是世界六大城市群之一。" messageAlignment:NSTextAlignmentCenter Item:@[@"取消",@"确定"]  selectBlock:^(NSInteger index) {
-        NSLog(@"index->%ld",index);
-    }];
-    
-    [alert messageLabelTextColorWith:NSMakeRange(3, 5) andColor:[UIColor redColor]];
-    alert.itemTitleColorArr = @[[UIColor grayColor],[UIColor greenColor]];;
-    //    alert.showType = CJKTAlertShowType_ShrinkIn;
-    //    alert.dismissType = CJKTAlertDismissType_ShrinkOut;
-    
-    [alert show];
-    
-}
-
--(void)btn4Clicked{
-    [self.navigationController pushViewController:[TestViewController new] animated:YES];
-}
-
-#pragma mark -- CJKTActionSheetDelegate
-- (void)actionSheet:(CJKTActionSheet *)actionSheet clickButtonAtIndex:(NSInteger)buttonIndex{
-    
-    NSLog(@"delegate点击了sheet%ld",(long)buttonIndex+1);
-}
-
-- (void)actionSheetCancle:(CJKTActionSheet *)actionSheet{
-    
-    NSLog(@"点击取消");
-}
-
-
 
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (void)dealloc {
+    NSLog(@"销毁%@",self);
 }
 
 /*

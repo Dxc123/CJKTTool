@@ -29,7 +29,7 @@ typedef NS_ENUM(NSInteger, CJKTCheckingType) {
 #pragma mark --  验证字符串的类型（手机号、邮箱、验证码、密码等）
 
 /**
- 验证手机号
+验证字符串的类型（手机号、邮箱、验证码、密码等）
  @param string 字符串
  @param type 类型
  @return 返回是、否
@@ -37,27 +37,65 @@ typedef NS_ENUM(NSInteger, CJKTCheckingType) {
 + (BOOL)cjkt_checkStringTypeWithString:(NSString *)string checkingType:(CJKTCheckingType)type;
 
 
-#pragma mark --   计算普通文本 CGSize
+////验证手机号码
+//+ (BOOL)cjkt_validateMobile:(NSString *)mobile;
+//
+////验证电子邮箱
+//+ (BOOL)cjkt_validateEmail:(NSString *)email;
+//
+
+
+/**
+ 去除字符串前后的空白,不包含换行符
+ */
+- (NSString *)cjkt_removebBothSidesWhiteSpace;
+
+/**
+ 去除字符串中所有空白
+ */
+- (NSString *)cjkt_removeWhiteSpace;
+- (NSString *)cjkt_removeNewLine;
+
+
+
+
+/******************************************************************/
+//
+//                        NSString文本计算
+//
+/******************************************************************/
+
+#pragma mark -- 计算普通文本 CGSize
 /**
  计算普通文本 CGSize
  @param size 限定最大大小
  @param font 字体
- @return 字符串大小
+ @return 字符串Size
  */
 - (CGSize)cjkt_getSizeCalculateWithSize:(CGSize)size font:(UIFont *)font;
 
 
-#pragma mark --  设置富文本的高度（根据富文本的行间距、字体、宽度）
-
+#pragma mark --  设置文本的高度（根据行间距、字体、宽度）
 /**
- 设置富文本的高度（根据富文本的行间距、字体、宽度）
+ 设置文本的高度（根据行间距、字体、宽度）
  @param string 需要改变的字符串
  @param lineSpace 行间距
  @param font 字体大小
  @param width 宽度
- @return 生成的富文本
+ @return 字符串Size
  */
 - (CGSize)cjkt_getAttributionHeightWithString:(NSString *)string lineSpace:(CGFloat)lineSpace font:(UIFont *)font width:(CGFloat)width;
+
+
+
+
+/******************************************************************/
+//
+//                        NSMutableAttributedString富文本操作
+//
+/******************************************************************/
+
+
 
 
 #pragma mark --  整句文本设置删除线
@@ -136,10 +174,17 @@ typedef NS_ENUM(NSInteger, CJKTCheckingType) {
  */
 + (NSMutableAttributedString *)cjkt_setLineAndTextSpaceWithTotalString:(NSString *)totalString LineSpace:(CGFloat)lineSpace textSpace:(CGFloat)textSpace;
 
-/***********************************************************/
 
 
 
+
+
+
+/******************************************************************/
+//
+//                            格式化字符串
+//
+/******************************************************************/
 
 #pragma mark -- 格式化电话号码（中间四位*号表示）
 /**
@@ -177,4 +222,19 @@ typedef NS_ENUM(NSInteger, CJKTCheckingType) {
 //  格式化金额 (分转元,保留两位小数)
 // */ 格式化金额 (分转元,保留两位小数)
 //- (NSString *)formatToTwoDecimal;
+
+
+
+
+
+/******************************************************************/
+//
+//                            截取字符串
+//
+/******************************************************************/
+/// 截取字符串
+/// @param from 开始Index
+/// @param to 结束Index
+-(NSString*)substringFromIndex:(int)from toIndex:(int)to;
+
 @end

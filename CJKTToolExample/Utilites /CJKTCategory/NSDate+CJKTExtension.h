@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 /** 获取系统当前的时间戳，即当前时间距1970的秒数（以毫秒为单位） */
 + (NSString *)cjkt_timestamp;
 
-/** 获取当前的时间 */
+/** 获取当前的时间(yyyy-MM-dd HH:mm:ss) */
 + (NSString *)cjkt_currentDateString;
 
 /**

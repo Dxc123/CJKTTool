@@ -16,6 +16,10 @@
 
 #import "DefineMarco.h"//宏定义
 #import "CJKTAPIs.h"//网络请求api
+#import "CJKTFileManager.h"//文件处理
+//布局分类
+#import "UIView+MMLayout.h"
+#import "UIView+HHAddSubviews.h"
 
 #import <AFNetworking.h>
 #import <MJRefresh.h>
@@ -24,9 +28,11 @@
 #import <Masonry.h>
 #import <SDWebImage.h>
 #import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
+
+
 //Kit
-//#import "YYKit.h"
-#import <YYKit/YYKit.h>
+#import "YYKit.h"
+//#import <YYKit/YYKit.h>
 #import <QMUIKit.h>
 
 
@@ -38,9 +44,7 @@
 //仿新闻标签栏
 #import <SGPagingView.h>
 
-#import "CJKTSingleton.h"
-#import "CJKTUserModel.h"
-#define SINGLETON [CJKTSingleton sharedInstance]
+#import "CJKTKit.h"
 
 
 

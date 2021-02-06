@@ -14,7 +14,7 @@
 #import "NSMutableAttributedString+CJKTExtension.h"
 
 #import "UIView+CJKTExtension.h"
-#import "UIView+Gradient.h"
+#import "UIView+XWAddForRoundedCorner.h"
 
 #import "UIViewController+CJKTExtension.h"
 
@@ -30,6 +30,7 @@
 #import "UITextView+CJKTInputLimit.h"
 
 #import "UITextField+CJKTInputLimit.h"
+#import "UITextFiled+Shake.h"
 
 #import "CAShapeLayer+CJKTViewMask.h"
 
@@ -40,4 +41,6 @@
 #import "UIImage+CJKTExtension.h"
 
 #import "UITableViewCell+CSCellShadows.h"
+
+#import "UISearchBar+CJKTChangePrivateTextField.h"
 #endif /* CJKTCategory_h */

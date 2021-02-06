@@ -24,7 +24,7 @@
         NSMutableArray *imgs = [NSMutableArray array];
         for (int i = 0; i <= 69 ; i++) {
             NSString *imgName = [NSString stringWithFormat:@"loading_%02d",i];
-            [imgs addObject:KIMAGE(imgName)];
+            [imgs addObject:kIMAGE(imgName)];
         }
         _images = imgs.copy;
 //        //获取Gif文件

@@ -11,7 +11,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UILabel (CJKTExtention)
-//内边距属性
+#warning 内边距属性会导致崩溃
+/**
+ 内边距属性 （）
+ */
 @property (nonatomic, assign) UIEdgeInsets contentInset;
 
 #pragma mark --根据字符串，字体，计算UILabel宽度

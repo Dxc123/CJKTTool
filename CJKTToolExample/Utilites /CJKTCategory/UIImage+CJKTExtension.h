@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+NS_ASSUME_NONNULL_BEGIN
 /**
  原理：一种生成渐变颜色UIImage的方法，从而可以使用UIColor的api
  + (UIColor *)colorWithPatternImage:(UIImage *)image
@@ -43,7 +44,7 @@ typedef NS_ENUM(NSUInteger, GradientType) {
 +(UIImage *) cjkt_imageCompressForWidthScale:(UIImage *)sourceImage targetWidth:(CGFloat)defineWidth;
 
 
-#pragma mark -- 生成渐变颜色UIImage的方法
+#pragma mark -- 生成渐变颜色（UIImage的方法）
 /**
   生成渐变颜色UIImage的方法
  */
@@ -53,9 +54,8 @@ typedef NS_ENUM(NSUInteger, GradientType) {
  使用方法如下:
  UIColor *topleftColor = [UIColor colorWithRed:48/255.0f green:127/255.0f blue:202/255.0f alpha:1.0f];
  UIColor *bottomrightColor = [UIColor colorWithRed:35/255.0f green:195/255.0f blue:95/255.0f alpha:1.0f];
- UIImage *bgImg = [UIImage cjkt_gradientColorImageFromColors:@[topleftColor, bottomrightColor] gradientType:GradientTypeUpleftToLowright imgSize:SCREEN_SIZE];
- 
- self.view.backgroundColor = [UIColor colorWithPatternImage:CGSizeMake(100 ,100);];
+ UIImage *bgImg = [UIImage cjkt_gradientColorImageFromColors:@[topleftColor, bottomrightColor] gradientType:GradientTypeUpleftToLowright imgSize:btn.size];
+ btn.backgroundColor = [UIColor colorWithPatternImage:bgImg];
  
  */
 
@@ -80,13 +80,19 @@ typedef NS_ENUM(NSUInteger, GradientType) {
 
 /**
  根据颜色生成图片
- 
  @param color 颜色
  @return 图片
  */
-+ (UIImage *)image_WithColor:(nullable UIColor *)color;
++ (UIImage *)image_WithColor:(UIColor *)color;
 
-
+/**
+ 根据纯颜色生成图片
+ */
++ (UIImage *)cjkt_imageWithColor:(UIColor *)aColor;
+/**
+根据纯颜色、frame生成图片
+*/
++ (UIImage *)cjkt_imageWithColor:(UIColor *)aColor withFrame:(CGRect)frame;
 
 /**
  给图片添加文字水印
@@ -96,7 +102,7 @@ typedef NS_ENUM(NSUInteger, GradientType) {
  @param attributed 文字的富文本属性
  @return 图片
  */
-+ (UIImage *_Nonnull)image_WithWaterMarkText:(nullable NSString *)text textPoint:(CGPoint)point attributedString:(nullable NSDictionary *)attributed;
++ (UIImage *)image_WithWaterMarkText:(NSString *)text textPoint:(CGPoint)point attributedString:(nullable NSDictionary *)attributed;
 
 
 
@@ -106,7 +112,7 @@ typedef NS_ENUM(NSUInteger, GradientType) {
  @param markImage 水印图片
  @return 图片
  */
-+ (UIImage *_Nonnull)image_WithWaterMarkImage:(nullable UIImage *)markImage;
++ (UIImage *)image_WithWaterMarkImage:(nullable UIImage *)markImage;
 
 
 
@@ -115,7 +121,7 @@ typedef NS_ENUM(NSUInteger, GradientType) {
  
  @return 图片
  */
-+ (UIImage *_Nonnull)image_Circular;
++ (UIImage *)image_Circular;
 
 
 
@@ -126,14 +132,12 @@ typedef NS_ENUM(NSUInteger, GradientType) {
  @param borderColor 边框颜色
  @return 图片
  */
-+ (UIImage *_Nonnull)image_CircularBorder:(CGFloat)borderWidth color:(nonnull UIColor *)borderColor;
++ (UIImage *)image_CircularBorder:(CGFloat)borderWidth color:(nonnull UIColor *)borderColor;
 
 
-
-
-
-
-
-
-
+/**
+ 修正图片转向
+ */
++ (UIImage *)cjkt_fixOrientation:(UIImage *)aImage ;
 @end
+NS_ASSUME_NONNULL_END

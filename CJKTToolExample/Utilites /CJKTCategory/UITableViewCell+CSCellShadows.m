@@ -20,7 +20,7 @@
     BOOL isSectionOneRow = ([tableView numberOfRowsInSection:indexPath.section] == 1);// 只有一个cell
     
     // the shadow rect determines the area in which the shadow gets drawn
-    CGRect shadowRect = CGRectInset(CGRectMake(0, 0, kScreenH, self.frame.size.height), 20, -10);
+    CGRect shadowRect = CGRectInset(CGRectMake(0, 0, SCREEN_WIDTH, self.frame.size.height), 20, -10);
     if(isFirstRow)
        shadowRect.origin.y += 0;
     else if(isLastRow)
@@ -29,7 +29,7 @@
 
     
     // the mask rect ensures that the shadow doesn't bleed into other table cells
-    CGRect maskRect = CGRectInset(CGRectMake(0, 0, kScreenH, self.frame.size.height), -20, 0);
+    CGRect maskRect = CGRectInset(CGRectMake(0, 0, SCREEN_WIDTH, self.frame.size.height), -20, 0);
     if(isFirstRow) {
         maskRect.origin.y -= 10;
         maskRect.size.height += 10;

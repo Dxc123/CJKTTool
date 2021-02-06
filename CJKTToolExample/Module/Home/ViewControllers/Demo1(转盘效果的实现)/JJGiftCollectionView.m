@@ -12,16 +12,14 @@
 
 @interface JJGiftCollectionView() <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
-@property (nonatomic, assign) NSInteger selectedGiftIndex;
+@property (nonatomic, assign) NSInteger selectedItemIndex;
 @property (nonatomic, assign) BOOL isScrolling;
+@property (nonatomic, assign) NSInteger itemCount;
 
 @end
 extern CGFloat radius_;
 
 @implementation JJGiftCollectionView
-{
-    NSInteger itemCount_;
-}
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -35,8 +33,8 @@ extern CGFloat radius_;
         self.delegate = self;
         self.dataSource = self;
         [self registerClass:[JJCollectionViewCell class] forCellWithReuseIdentifier:NSStringFromClass(JJCollectionViewCell.class)];
-        itemCount_ = 10;
-        _selectedGiftIndex = 0;
+        _itemCount = 10;
+        _selectedItemIndex = 0;
     }
     return self;
 }
@@ -53,7 +51,7 @@ extern CGFloat radius_;
 
 - (void)scrollToSelectedIndex:(NSInteger)index
 {
-    self.selectedGiftIndex = index;
+    self.selectedItemIndex = index;
     [self setContentOffset:CGPointMake([self itemPerWidthFromIphone]*index, 0) animated: YES];
 }
 
@@ -61,16 +59,16 @@ extern CGFloat radius_;
 
 - (void)scrollToCenter
 {
-    if (itemCount_ == 0) {
+    if (_itemCount == 0) {
         return ;
     }
-    [self scrollToSelectedIndex:floorf(itemCount_/2)];
+    [self scrollToSelectedIndex:floorf(_itemCount/2)];
 }
 
 - (CGFloat)itemPerWidthFromIphone
 {
     CGFloat width = self.contentSize.width;
-    NSInteger count = itemCount_;
+    NSInteger count = _itemCount;
     CGFloat anglePerItem = atan((width/count) / (radius_+25));
     CGFloat angleAtExtreme = [self numberOfItemsInSection:0] > 0 ? -([self numberOfItemsInSection:0] -1)*anglePerItem : 0;
     CGFloat factor = -angleAtExtreme/(self.contentSize.width - CGRectGetWidth(self.bounds));
@@ -93,11 +91,11 @@ extern CGFloat radius_;
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     CJKTLog(@"点击了%ld",(long)indexPath.row);
-    if (indexPath.row == _selectedGiftIndex || indexPath.row >= itemCount_) {
+    if (indexPath.row == _selectedItemIndex || indexPath.row >= _itemCount) {
         return ;
     }
-    _selectedGiftIndex = indexPath.row;
-    [self scrollToSelectedIndex:_selectedGiftIndex];
+    _selectedItemIndex = indexPath.row;
+    [self scrollToSelectedIndex:_selectedItemIndex];
 }
 
 #pragma mark - ScrollViewDelegate

@@ -246,6 +246,18 @@ static void *cjkt_viewTappedBlockKey = &cjkt_viewTappedBlockKey;
     return nil;
 }
 
+#pragma mark -- 把view加在window上
+/**
+ 把view加在window上
+ */
+- (void)cjkt_addToWindow{
+    id appDelegate = [[UIApplication sharedApplication] delegate];
+       if ([appDelegate respondsToSelector:@selector(window)]) {
+           UIWindow *window = (UIWindow *)[appDelegate performSelector:@selector(window)];
+           [window addSubview:self];
+       }
+}
+
 
 #pragma mark -- 屏幕截图
 /**
@@ -323,17 +335,52 @@ static void *cjkt_viewTappedBlockKey = &cjkt_viewTappedBlockKey;
 }
 
 
-#pragma mark -- 把view加在window上
-/**
- 把view加在window上
- */
-- (void)cjkt_addToWindow{
-    id appDelegate = [[UIApplication sharedApplication] delegate];
-       if ([appDelegate respondsToSelector:@selector(window)]) {
-           UIWindow *window = (UIWindow *)[appDelegate performSelector:@selector(window)];
-           [window addSubview:self];
-       }
+
+
+
+- (void)fadeIn{
+    [self fadeInOnComplet:^(BOOL finished) {
+        
+    }];
 }
 
+- (void)fadeOut{
+    [self fadeOutOnComplet:^(BOOL finished) {
+    }];
+}
 
+- (void)fadeInOnComplet:(void(^)(BOOL finished))complet{
+    self.alpha = 0;
+    [UIView animateWithDuration:.3 animations:^{
+        self.alpha = 1;
+    } completion:complet];
+}
+
+- (void)fadeOutOnComplet:(void(^)(BOOL finished))complet{
+    [UIView animateWithDuration:.3 animations:^{
+        self.alpha = 0;
+    } completion:complet];
+}
+
+- (void)removeAllSubviews{
+    for (UIView *temp in self.subviews) {
+        [temp removeFromSuperview];
+    }
+}
+
+- (void)removeSubviewWithTag:(int)tag{
+    for (UIView *temp in self.subviews) {
+        if (temp.tag==tag) {
+            [temp removeFromSuperview];
+        }
+    }
+}
+
+- (void)removeSubviewExceptTag:(int)tag{
+    for (UIView *temp in self.subviews) {
+        if (temp.tag!=tag) {
+            [temp removeFromSuperview];
+        }
+    }
+}
 @end

@@ -30,32 +30,83 @@ typedef NS_ENUM(NSUInteger, OpenType) {
 */
 +(UIWindow*)keyWindow;
 
+/**
+ 获取Window当前显示的ViewController
+ */
++ (UIViewController*)currentController;
+
 
 /**
-  延迟执行
+动态颜色设置
+ @param lightColor  亮色
+ @param darkColor  暗色
+*/
++ (UIColor *)generateDynamicColor:(UIColor *)lightColor darkColor:(UIColor *)darkColor;
+
+#pragma mark -  快速创建UILabel
+/**
+ 快速创建UILabel
  */
-void GCD_AFTER(CGFloat time,dispatch_block_t block);
++(UILabel *)initUILabelWithFrame:(CGRect)frame
+                            font:(UIFont *)font
+                           title:(NSString *)title
+                       textColor:(UIColor *)textColor
+                       numberOfLines:(NSInteger)number
+                   textAlignment:(NSTextAlignment)textAlignment;
+
+#pragma mark -  快速创建UIButton
+/**
+ 快速创建UIButton(text)
+ */
++ (UIButton *)initUIButtonWithFrame:(CGRect)frame
+                               font:(UIFont *)font
+                              title:(NSString *)title
+                          textColor:(UIColor *)textColor
+                         backGround:(UIColor *)bgColor
+                        borderWidth:(CGFloat)borderWidth
+                        borderColor:(UIColor *)borderColor
+                        cornerRadius:(CGFloat)cornerRadius;
+#pragma mark -  快速创建UIButton（imge）
 
 /**
- 注册通知
- */
-void MM_AddObserver(id observer,SEL aSelector,NSNotificationName aName);
+快速创建UIButton（imge）
+*/
++ (UIButton *)initUIButtonWithFrame:(CGRect)frame
+                          imgNormal:(NSString *)imgNormal
+                        imgSelected:(NSString *)imgSelected;
+
+
+
 
 /**
- 发送通知
+ 保存整个View为图片
  */
-void MM_PostNotification(NSNotificationName aName,id anObject);
-
++ (UIImage *)getImageViewWithView:(UIView *)view;
 
 #pragma mark - 时间格式化
 //获取当前时间戳方法，返回10位。
 +(NSString *)getCurrentTime;
-//时间转化成“刚刚、几分钟前、几小时前、几天前、某月某日几点几分”格式
-//注意：后台返回的时间类型  "2016-10-11 12:33:33"
+
+/**
+ 时间转化成“刚刚、几分钟前、几小时前、几天前、某月某日几点几分”格式
+注意：后台返回的时间类型  "2016-10-11 12:33:33"
+ */
+
 +(NSString *)compareCurrentTime:(NSString *)str;
+
 //注意：后台返回的时间戳包括10位或者有小数点。
 //eg：“1480064761” 1480064761.000000
 +(NSString *)distanceTimeWithBeforeTime:(double)beTime;
+
+/**
+ 时间转时间戳
+ */
++ (NSString *)cjkt_getTimestamp:(NSString *)time;
+
+/**
+ 时间戳转时间
+ */
++ (NSString *)cjkt_getTime:(NSString *)timestamp;
 
 /**
  全面判断字符串为空
@@ -69,23 +120,7 @@ void MM_PostNotification(NSNotificationName aName,id anObject);
  */
 +(BOOL)openOtherAppWithOpenType:(OpenType )OpenType;
 
-#pragma mark -  快速创建UILabel
-/**
- 快速创建UILabel
- */
-+(UILabel *)initUILabelWithFrame:(CGRect)frame title:(NSString *)title numberOfLines:(NSInteger)number textAlignment:(NSTextAlignment)textAlignment textColor:(UIColor *)textColor font:(UIFont *)font;
 
-#pragma mark -  快速创建UIButton
-/**
- 快速创建UIButton
- */
-+ (UIButton *)initUIButtonWithFrame:(CGRect)frame title:(NSString *)title tag:(NSInteger)tag backGround:(UIColor *)bgColor textColor:(UIColor *)textColor borderWidth:(CGFloat)borderWidth borderColor:(UIColor *)borderColor cornerRadius:(CGFloat)cornerRadius font:(UIFont *)font;
-+ (UIButton *)initUIButtonWithFrame:(CGRect)frame imgNormal:(NSString *)imgNormal imgSelected:(NSString *)imgSelected;
-#pragma mark -  获取Window当前显示的ViewController
-/**
- 获取Window当前显示的ViewController
- */
-+ (UIViewController *)currentController;
 
 #pragma mark -   AlertViewWithMessage
 /**
@@ -93,20 +128,6 @@ void MM_PostNotification(NSNotificationName aName,id anObject);
  */
 + (void)showAlertViewWithMessage:(NSString *)message presentViewController:(UIViewController*)viewController;
 
-
-#pragma mark-- 16进制数 --> 颜色
-/**
- *
- * 16进制颜色(html颜色值)字符串转为UIColor
- *
- **/
-+(UIColor *)hexStringToColor:(NSString *)stringToConvert;
-
-#pragma mark --  16进制数 --> 颜色
-/**
- 根据16进制数生成颜色
- */
-+ (UIColor *)uiColorFromString:(NSString *)clrString;
 
 
 
@@ -119,14 +140,17 @@ void MM_PostNotification(NSNotificationName aName,id anObject);
 /**
  时间戳—>字符串时间  （YYYY-MM-dd HH:mm:ss 自由组合 ）
  */
-+ (NSString *)formatterTimeWithStr:(NSString *)timeInterval fomatter:(NSString *)formatter ;
++ (NSString *)formatterTimeWithStr:(NSString *)timeInterval
+                          fomatter:(NSString *)formatter ;
 
 /**
  时间戳—>字符串时间  （YYYY-MM-dd HH:mm:ss 自由组合 ）
  */
-+ (NSString *)cjkt_timeStampToStringWithTimeStampStr:(NSString *)timeStampStr formatter:(NSString *)format;
++ (NSString *)cjkt_timeStampToStringWithTimeStampStr:(NSString *)timeStampStr
+                                           formatter:(NSString *)format;
 #pragma mark - 拼接URL
-+(NSString *)getUrlWithParametersDic:(NSDictionary *)parametersDic  urlString:(NSString *)urlString;
++(NSString *)getUrlWithParametersDic:(NSDictionary *)parametersDic
+                           urlString:(NSString *)urlString;
 
 
 #pragma mark -- 判断某个界面是否是第一次加载

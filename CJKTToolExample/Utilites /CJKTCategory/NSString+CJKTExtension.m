@@ -97,6 +97,35 @@ return [self stringByAppendingString:str];
 
 
 
+
+
+
+
+
+/**
+去除字符串前后的空白,不包含换行符
+*/
+- (NSString *)cjkt_removebBothSidesWhiteSpace
+{
+    return [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+}
+
+- (NSString *)cjkt_removeWhiteSpace
+{
+    return [[self componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString:@""];
+}
+
+- (NSString *)cjkt_removeNewLine
+{
+    return [[self componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@""];
+}
+
+/******************************************************************/
+//
+//                        NSString文本计算
+//
+/******************************************************************/
+
 #pragma mark --   计算普通文本 CGSize
 
 - (CGSize)cjkt_getSizeCalculateWithSize:(CGSize)size font:(UIFont *)font {
@@ -123,6 +152,13 @@ return [self stringByAppendingString:str];
     
 }
 
+
+
+/******************************************************************/
+//
+//                        NSMutableAttributedString富文本操作
+//
+/******************************************************************/
 
 
 #pragma mark -- 整句文本设置删除线
@@ -272,7 +308,11 @@ return [self stringByAppendingString:str];
 
 
 
-/*********************************************/
+/******************************************************************/
+//
+//                            格式化字符串
+//
+/******************************************************************/
 
 #pragma mark-- 格式化电话号码(中间四位*号表示)
 
@@ -424,4 +464,24 @@ return [self stringByAppendingString:str];
     return result;
 }
 
+
+
+
+
+
+/******************************************************************/
+//
+//                            截取字符串
+//
+/******************************************************************/
+
+/// 截取字符串
+/// @param from 开始Index
+/// @param to 结束Index
+-(NSString*)substringFromIndex:(int)from toIndex:(int)to{
+    NSRange range;
+    range.location = from;
+    range.length = to - from;
+    return [self substringWithRange: range];
+}
 @end
