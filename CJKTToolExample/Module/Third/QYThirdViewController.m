@@ -10,6 +10,9 @@
 #import "CRTimer.h"
 #import "AnimationKit.h"
 #import "NSKeyedArchiverDemo.h"
+#import "QYCategoryDemoViewController.h"
+#import "WCDBViewController.h"
+
 @interface QYThirdViewController ()
 <UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
@@ -66,15 +69,21 @@
          @"Mode归档Demo",
          @"ActionSheetDemo",
          @"切换语言",
+         @"NSAttributedString属性链式编程实现",
+         @"WCDB封装",
      ];
 
     self.classNames = @[
         @"NSKeyedArchiverDemo",
         @"ActionSheetDemo",
         @"ChangeLangueViewController",
+        @"QYCategoryDemoViewController",
+        @"WCDBViewController",
     ];
     
     [self.view addSubview:self.tableView];
+    
+   
 }
 - (UITableView *)tableView {
     if(!_tableView) {

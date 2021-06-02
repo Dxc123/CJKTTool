@@ -96,6 +96,7 @@ UserDefaults get key
 NSString *_Nonnull kUserDefaultsGetKey(NSString *key){
     return  [[NSUserDefaults standardUserDefaults] objectForKey:key];
 }
+
 //extern void kUserDefaultsPrintAllKey {
 //       NSDictionary *dic = [[NSUserDefaults standardUserDefaults] dictionaryRepresentation];
 //       NSLog(@"所有UserDefaults存储的集合 dic = %@", dic);
@@ -200,7 +201,7 @@ UIWindow * kGetKeyWindow(void){
 }
 
 /**状态栏高度*/
-CGFloat  kStatusBarHeight(void){
+CGFloat  kStatusBarH(void){
     if (@available(iOS 13.0, *)) {
         return  [UIApplication sharedApplication].windows.firstObject.windowScene.statusBarManager.statusBarFrame.size.height;
     } else {
@@ -209,7 +210,7 @@ CGFloat  kStatusBarHeight(void){
 }
 
 /**导航栏高度*/
-CGFloat  kNavHeight(void){
+CGFloat  kNavBarH(void){
     if (kIsIPhoneX()) {
         return 88.f;
     }else{
@@ -218,7 +219,7 @@ CGFloat  kNavHeight(void){
 }
 
 /**Tabbar高度*/
-CGFloat  kTabbarHeight(void){
+CGFloat  kTabbarH(void){
     if (kIsIPhoneX()) {
         return 49.f + 34.f;
     }else{

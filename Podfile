@@ -8,22 +8,22 @@ target 'CJKTToolExample' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
 
   # Pods for CJKTToolExample
-pod 'AFNetworking',:inhibit_warnings => true
-pod 'XMNetworking'
-#pod 'CCNetworkKit'
+pod 'AFNetworking', '~> 4.0'
+pod 'SDWebImage', '~> 5.10.4'
+pod 'Masonry', '~> 1.1.0'
+pod 'MMLayout', '~> 0.3.0'#简单的Frame 设置封装 支持链接方式编程
 pod 'Reachability'
 pod 'MJRefresh'
 pod 'MJExtension'
 pod 'MBProgressHUD'
 pod 'SVProgressHUD'
-pod 'SDWebImage'
-pod 'Masonry'
+
 
 #pop弹窗
 pod 'LEEAlert' #链式语法、优雅的可自定义Alert ActionSheet
 pod 'FFPopup'#pop弹窗容器
 pod 'JXTAlertManager'#UIAlertView/UIAlertController便捷调用工具
-pod 'YBPopupMenu' #pop弹窗菜单
+pod 'YBPopupMenu', '~> 1.1.7' #pop弹窗菜单
 pod 'Toast'
 
 pod 'DZNEmptyDataSet'#空白展位图
@@ -48,28 +48,33 @@ pod 'SGPagingView'
 # pod 'PPBadgeView'#小红点提醒
 # pod 'PPNumberButton'#(加减按钮)
 
-pod 'LSAnimator'#动画库(封装核心动画)
+#pod 'LSAnimator'#动画库(封装核心动画)
 
 #内购
 pod 'IAPHelper'
-pod 'RMStore'
+#pod 'RMStore'
 
 #数据库：
 pod 'FMDB'
-pod 'BGFMDB'
+#JKDBModel
+#pod 'BGFMDB'
 #pod 'JQFMDB'
-#pod 'MMKV' #微信开源,基于 mmap 内存映射的 key-value 组件
+pod 'WCDB', '~> 1.0.7.5'#微信团队开源
+pod 'MMKV', '~> 1.2.7' #微信团队开源,基于 mmap 内存映射的 key-value 组件
 #pod 'SAMKeychain' #钥匙串存取数据
-pod 'PINCache','3.0.1'#缓存
+pod 'PINCache', '~> 3.0.3'
 
 # 文件压缩与解压
 #pod 'SSZipArchive'
 
 pod "MMWebView"#封装WKWebView
 
+pod 'CJKTCategory'#常用的分类扩展
+pod 'QYCategory'#创建控件封装，支持链接方式
+
 #Kit集合
-#pod 'YYKit'# 手动导入了，文件分类清晰(并且标出常用的注释)
-pod 'QMUIKit'#腾讯QMUI团队开源
+pod 'YYKit'
+#pod 'QMUIKit'#腾讯QMUI团队开源
 
 #DEBUG辅助工具
 pod 'LookinServer', :configurations => ['Debug'] #腾讯QMUI团队开源UI调试软件 配合MAC 端Lookin使用
@@ -79,11 +84,9 @@ pod 'LookinServer', :configurations => ['Debug'] #腾讯QMUI团队开源UI调试
 
 #pod 'MLeaksFinder'# 检测内存泄漏
 
-#滴滴开源调试辅助工具  , :configurations => ['Debug']
-#pod 'DoraemonKit/Core', '~> 1.1.6' ,:inhibit_warnings => true
-#pod 'DoraemonKit/WithLogger', '~> 1.1.6',:inhibit_warnings => true
-#pod 'DoraemonKit/WithGPS', '~> 1.1.6',:inhibit_warnings => true
-#pod 'DoraemonKit/WithLoad', '~> 1.1.6',:inhibit_warnings => true
+#滴滴开源调试辅助工具
+pod 'DoraemonKit/Core', '~> 3.0.4', :configurations => ['Debug'] #必选
+
 
 ###############  SDK   ########
 #pod 'WechatOpenSDK'#微信官方SDK

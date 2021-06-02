@@ -11,6 +11,10 @@
 #import "QYLoginViewController.h"
 #import "QYNavigationViewController.h"
 #import "KSGuaidViewManager.h"
+
+#ifdef DEBUG
+#import <DoraemonKit/DoraemonManager.h>
+#endif
 @interface AppDelegate ()
 
 @end
@@ -38,7 +42,9 @@
            self.window.rootViewController = [QYTabBarViewController new]; ;
     }
    
-    
+//   #ifdef DEBUG
+//   [[DoraemonManager shareInstance] installWithPid:@"productId"];//productId为在“平台端操作指南”中申请的产品id
+//   #endif
   
     return YES;
 }

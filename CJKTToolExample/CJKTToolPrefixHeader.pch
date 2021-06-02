@@ -17,9 +17,6 @@
 #import "DefineMarco.h"//宏定义
 #import "CJKTAPIs.h"//网络请求api
 #import "CJKTFileManager.h"//文件处理
-//布局分类
-#import "UIView+MMLayout.h"
-#import "UIView+HHAddSubviews.h"
 
 #import <AFNetworking.h>
 #import <MJRefresh.h>
@@ -33,7 +30,7 @@
 //Kit
 #import "YYKit.h"
 //#import <YYKit/YYKit.h>
-#import <QMUIKit.h>
+//#import <QMUIKit.h>
 
 
 //弹窗
@@ -46,6 +43,8 @@
 
 #import "CJKTKit.h"
 
+#import <QYCategory/QYCategory.h>
+#import <CJKTCategory/CJKTCategory.h>
 
 
 // Include any system framework and library headers here that should be included in all compilation units.

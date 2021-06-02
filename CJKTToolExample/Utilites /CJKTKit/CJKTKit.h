@@ -20,6 +20,9 @@
 
 #import "ConstValues.h"
 
+//Utility
+#import "CJKTUtility.h"
+
 //ExternMethods
 #import "ExternMethods.h"
 #import "GlobalInlineMethod.h"

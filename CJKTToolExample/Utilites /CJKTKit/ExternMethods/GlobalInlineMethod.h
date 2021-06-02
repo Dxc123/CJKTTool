@@ -23,19 +23,19 @@
 /**
  屏幕宽
  */
-static inline CGFloat kCCScreenWidth() {
+static inline CGFloat kGScreenWidth() {
     return [UIScreen mainScreen].bounds.size.width;
 }
 /**
 屏幕高
 */
-static inline CGFloat kCCScreenHeight() {
+static inline CGFloat kGScreenHeight() {
     return [UIScreen mainScreen].bounds.size.height;
 }
 /**
   主线程更新UI
  */
-static inline void Dispatch_mainQueue(void(^block)(void)) {
+static inline void kGDispatch_mainQueue(void(^block)(void)) {
     dispatch_async(dispatch_get_main_queue(), ^{
         block();
     });
@@ -44,14 +44,14 @@ static inline void Dispatch_mainQueue(void(^block)(void)) {
 /**
   延迟执行
  */
-static inline void Dispatch_after(CGFloat time,dispatch_block_t block){
+static inline void kGDispatch_after(CGFloat time,dispatch_block_t block){
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(time * NSEC_PER_SEC)), dispatch_get_main_queue(), block);
 
 }
 /**
   异步执行
  */
-static inline void Dispatch_GlobalQueue(dispatch_block_t block) {
+static inline void kGDispatch_GlobalQueue(dispatch_block_t block) {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         block();
     });
@@ -60,7 +60,7 @@ static inline void Dispatch_GlobalQueue(dispatch_block_t block) {
 
 
 //发送通知
-static inline void postNotification(NSString *name,id obj) {
+static inline void kGPostNotification(NSString *name,id obj) {
     dispatch_async(dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:name object:obj];
     });
@@ -69,20 +69,20 @@ static inline void postNotification(NSString *name,id obj) {
 /**
 AppVersion
 */
-static inline NSString* AppVersion() {
+static inline NSString* kGAppVersion() {
     NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
     return [infoDictionary objectForKey:@"CFBundleShortVersionString"];
 }
 /**
  判断对象是否为空
  */
-static inline BOOL NotNilAndNullObj(id _ref) {
+static inline BOOL kGNotNilAndNullObj(id _ref) {
     return (((_ref) != nil) && (![(_ref) isEqual:[NSNull null]]));
 }
 /**
 判断字符串是否为空
 */
-static inline BOOL NotNilAndNullString(id _ref) {
+static inline BOOL kGNotNilAndNullString(id _ref) {
     return (((_ref) != nil) && (![(_ref) isEqual:[NSNull null]]) && (![(_ref)isEqualToString:@""]));
 }
 

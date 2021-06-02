@@ -28,7 +28,12 @@
     }];
     YYLabel *yylab = [[YYLabel alloc] init];
     [self.view addSubview:yylab];
-    yylab.m_height(40).m_width(250).m_top(380).m_left(50);
+    [yylab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(40);
+        make.width.mas_equalTo(250);
+        make.top.mas_equalTo(380);
+        make.leading.mas_equalTo(50);
+    }];
     yylab.attributedText = attr;
     
     

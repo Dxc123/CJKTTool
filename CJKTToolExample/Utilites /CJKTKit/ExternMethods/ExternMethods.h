@@ -65,7 +65,7 @@ NSString *_Nonnull kUserDefaultsGetKey(NSString *key);
 //////////
 
 /**systemVersion*/
-double  kGetSystemVersion(void)
+double  kGetSystemVersion(void);
 
 /**appVersion*/
 NSString *_Nonnull kGetAppVersion(void);
@@ -102,11 +102,11 @@ BOOL kIsIPhoneX(void);
 */
 UIWindow * kGetKeyWindow(void);
 /**状态栏高度*/
-CGFloat  kStatusBarHeight(void);
+CGFloat  kStatusBarH(void);
 /**导航栏高度*/
-CGFloat  kNavHeight(void);
+CGFloat  kNavBarH(void);
 /**Tabbar高度*/
-CGFloat  kTabbarHeight(void);
+CGFloat  kTabbarH(void);
 /**获取底部安全域高度*/
 CGFloat kSafeAreaBottomH(void);
 /**获取顶部安全域高度*/

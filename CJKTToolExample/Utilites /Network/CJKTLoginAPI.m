@@ -7,7 +7,6 @@
 //
 
 #import "CJKTLoginAPI.h"
-#import "CJKTNetWorkManager.h"
 @implementation CJKTLoginAPI
 
 @end

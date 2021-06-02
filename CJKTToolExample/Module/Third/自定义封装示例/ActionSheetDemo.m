@@ -19,9 +19,37 @@
     self.view.backgroundColor = [UIColor whiteColor];
     UIButton *btn = [CJKTTool initUIButtonWithFrame:CGRectMake(40, 100, 100, 44) font:[UIFont systemFontOfSize:15] title:@"保存" textColor:[UIColor blackColor] backGround:[UIColor cyanColor] borderWidth:0 borderColor:[UIColor clearColor] cornerRadius:0];
     [self.view addSubview:btn];
-    [btn addBlockEvents:UIControlEventTouchUpInside action:^(id sender) {
+    [btn cjkt__addButtonEventHandler:^{
         [self showActionSheet];
-    }];
+    } forControlEvents:UIControlEventTouchUpInside];
+    
+//    系统能否方法画圆角
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(50, 300, 200, 100)];
+    view.backgroundColor = [UIColor redColor];
+    [self.view addSubview:view];
+    view.layer.cornerRadius = 20;
+//    view.layer.maskedCorners = kCALayerMinXMinYCorner;
+//    view.layer.maskedCorners =  kCALayerMinXMinYCorner | kCALayerMaxXMinYCorner ; // 左上|右上
+    
+//    view.layer.maskedCorners =  kCALayerMinXMaxYCorner | kCALayerMaxXMaxYCorner ; // 左下|右下
+    
+//    view.layer.maskedCorners =  kCALayerMinXMinYCorner | kCALayerMinXMaxYCorner ; // 左上|左下
+    
+//    view.layer.maskedCorners =  kCALayerMaxXMinYCorner | kCALayerMaxXMaxYCorner ; // 右上|右下
+    
+    
+//    view.layer.maskedCorners =  kCALayerMinXMinYCorner | kCALayerMaxXMaxYCorner ; // 左上|右下
+    
+//     view.layer.maskedCorners =  kCALayerMinXMaxYCorner | kCALayerMaxXMinYCorner ; // 左下|右上
+    view.layer.maskedCorners =  kCALayerMinXMinYCorner | kCALayerMinXMaxYCorner | kCALayerMaxXMinYCorner ; // 左上|左下|右上
+//。。。。。。。。
+    view.layer.masksToBounds = YES;
+
+    
+  
+    
+    
+    
 }
 
 - (void)showActionSheet {
@@ -43,6 +71,9 @@
     actionSheet.ActionSheetCancelClickBlock = ^{
         
         NSLog(@"点击");;
+        
+        
+          [CJKTUtility openSettings];
     };
 
     [actionSheet show];

@@ -77,26 +77,6 @@
 }
 
 
-/**
-动态颜色设置
- @param lightColor  亮色
- @param darkColor  暗色
-*/
-+ (UIColor *)generateDynamicColor:(UIColor *)lightColor darkColor:(UIColor *)darkColor {
-    if (@available(iOS 13.0, *)) {
-        UIColor *dyColor =
-            [UIColor colorWithDynamicProvider:^UIColor *_Nonnull(UITraitCollection *_Nonnull traitCollection) {
-                if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
-                    return darkColor;
-                } else {
-                    return lightColor;
-                }
-            }];
-        return dyColor;
-    } else {
-        return lightColor;
-    }
-}
 
 #pragma mark -- 快速创建UILabel
 +(UILabel *)initUILabelWithFrame:(CGRect)frame

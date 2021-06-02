@@ -27,13 +27,17 @@
     
     UIButton *btn = [CJKTTool initUIButtonWithFrame:CGRectMake(40, 100, 100, 44) font:[UIFont systemFontOfSize:15] title:@"保存" textColor:[UIColor blackColor] backGround:[UIColor cyanColor] borderWidth:0 borderColor:[UIColor clearColor] cornerRadius:0];
     [self.view addSubview:btn];
-    [btn addBlockEvents:UIControlEventTouchUpInside action:^(id sender) {
+//    [btn addBlockEvents:UIControlEventTouchUpInside action:^(id sender) {
+//        CJKTLog(@"保存");
+//        [model saveToLocal];
+//    }];
+    [btn addBlockForControlEvents:UIControlEventTouchUpInside block:^(id  _Nonnull sender) {
         CJKTLog(@"保存");
-        [model saveToLocal];
+       [model saveToLocal];
     }];
     UIButton *btn2 = [CJKTTool initUIButtonWithFrame:CGRectMake(40, 200, 100, 44) font:[UIFont systemFontOfSize:15] title:@"取值" textColor:[UIColor blackColor] backGround:[UIColor cyanColor] borderWidth:0 borderColor:[UIColor clearColor] cornerRadius:0];
     [self.view addSubview:btn2];
-    [btn2 addBlockEvents:UIControlEventTouchUpInside action:^(id sender) {
+    [btn2 addBlockForControlEvents:UIControlEventTouchUpInside block:^(id  _Nonnull sender) {
         CJKTLog(@"取值");
         CJKTUserModel * result =  [CJKTUserModel getFromLocal];
         NSLog(@"nick_name = %@",result.nick_name);
@@ -41,12 +45,10 @@
     
     UIButton *btn3 = [CJKTTool initUIButtonWithFrame:CGRectMake(40, 300, 100, 44) font:[UIFont systemFontOfSize:15] title:@"清空" textColor:[UIColor blackColor] backGround:[UIColor cyanColor] borderWidth:0 borderColor:[UIColor clearColor] cornerRadius:0];
     [self.view addSubview:btn3];
-    [btn3 addBlockEvents:UIControlEventTouchUpInside action:^(id sender) {
+    [btn3 addBlockForControlEvents:UIControlEventTouchUpInside block:^(id  _Nonnull sender) {
         CJKTLog(@"清空");
-        [CJKTUserModel deleteAllData];
-       
+               [CJKTUserModel deleteAllData];
     }];
-    
     
     UIButton *btn4 = [CJKTTool initUIButtonWithFrame:CGRectMake(40, 400, 100, 44) font:[UIFont systemFontOfSize:15] title:@"渐变色" textColor:[UIColor blackColor] backGround:[UIColor cyanColor] borderWidth:0 borderColor:[UIColor clearColor] cornerRadius:0];
     [self.view addSubview:btn4];

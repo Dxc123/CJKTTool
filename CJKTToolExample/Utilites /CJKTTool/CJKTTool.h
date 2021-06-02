@@ -41,7 +41,7 @@ typedef NS_ENUM(NSUInteger, OpenType) {
  @param lightColor  亮色
  @param darkColor  暗色
 */
-+ (UIColor *)generateDynamicColor:(UIColor *)lightColor darkColor:(UIColor *)darkColor;
++ (UIColor *)colorWithNormalColor:(UIColor *)normalColor darkColor:(UIColor *)darkColor;
 
 #pragma mark -  快速创建UILabel
 /**

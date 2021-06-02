@@ -19,7 +19,7 @@
 {
     [super viewDidLoad];
     
-    MMWebView * webView = [[MMWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - CF_NavHeight)];
+    MMWebView * webView = [[MMWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT - CF_NavHeight)];
     webView.backgroundColor = [UIColor whiteColor];
     webView.opaque = NO;
     webView.delegate = self;

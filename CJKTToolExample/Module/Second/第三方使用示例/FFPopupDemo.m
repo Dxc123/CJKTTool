@@ -29,7 +29,12 @@
 //        [self Button2Clicked];
 //        [self btn3Clicked];
     }];
-    btn1.m_width(100).m_height(50).m_top(100).m_left(100);
+    [btn1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(100);
+        make.height.mas_equalTo(50);
+        make.top.mas_equalTo(100);
+        make.leading.mas_equalTo(100);
+    }];
     CJKTLog(@"状态栏高度 = %f",kStatusBarHeight());
     NSString *str = nil;
     CJKTLog(@" == %d",kStrIsEmpty(str));
